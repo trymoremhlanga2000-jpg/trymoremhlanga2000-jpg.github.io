@@ -340,98 +340,82 @@ section p {
   font-size: 0.9rem;
 }
 
-/* ===============================
-   SIDEBAR NAVIGATION
-   =============================== */
+/* ===================== Sidebar ===================== */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
-  height: 100vh;
-  background: linear-gradient(180deg, #080b10, #0b0d10);
-  border-right: 1px solid var(--border-soft);
-  padding: 2rem 1.5rem;
-  z-index: 1000;
+  width: 220px; /* slightly narrower to reduce empty space */
+  height: 100%;
+  background-color: #0f111a;
+  color: #fff;
+  padding: 25px 15px; /* reduce horizontal padding */
   display: flex;
   flex-direction: column;
+  gap: 25px;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
 }
 
-.sidebar-brand {
-  margin-bottom: 3rem;
+.sidebar h3 {
+  font-size: 1.4rem;
 }
 
-.sidebar-brand h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.sidebar-brand span {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+.sidebar span {
+  font-size: 0.85rem;
+  color: #aaa;
 }
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 15px;
 }
 
 .sidebar-nav a {
-  color: var(--text-secondary);
+  color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .sidebar-nav a:hover {
-  color: var(--accent);
-  transform: translateX(6px);
+  color: #00d4ff;
 }
 
-/* ===============================
-   MAIN CONTENT OFFSET
-   =============================== */
+/* ===================== Main Content ===================== */
 .main-content {
-  margin-left: 240px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  padding: 0 1.6rem;
+  margin-left: 220px; /* match sidebar width */
+  padding: 30px 50px;
+  max-width: calc(100% - 220px);
+  transition: margin 0.3s ease;
 }
 
-.content-wrapper {
-  width: 100%;
-  max-width: var(--max-width);
-}
-
-/* ===============================
-   RESPONSIVE
-   =============================== */
-@media (max-width: 1024px) {
+/* ===================== Responsive ===================== */
+@media (max-width: 1200px) {
   .sidebar {
-    display: none;
+    width: 200px;
+    padding: 20px 10px;
   }
+  .main-content {
+    margin-left: 200px;
+    padding: 20px 30px;
+    max-width: calc(100% - 200px);
+  }
+}
 
+@media (max-width: 900px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
   .main-content {
     margin-left: 0;
-    padding: 0 1rem;
-  }
-
-  .hero-content {
-    padding: 2rem 1rem;
-  }
-
-  .section-card {
-    padding: 2rem 1.5rem;
-  }
-
-  .project-case {
-    padding: 1.8rem 1.5rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
+    padding: 15px 20px;
+    max-width: 100%;
   }
 }
