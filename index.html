@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trymore Mhlanga |Statistician, Aspiring Data Scientist & ML Engineer</title>
+  <title>Trymore Mhlanga |Statistician, Aspiring Data Analyst, Scientist & ML Engineer</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -26,16 +26,16 @@
   </div>
 </nav>
 
-<!-- ===================== HERO ===================== -->
+<!-- ===================== HERO (UPGRADED) ===================== -->
 <section id="hero">
   <div class="hero-content">
-    <h1>Designing Predictive Systems That Drive Real-World Decisions</h1>
-    <h2><span class="typing"></span></h2>
+    <h1>Hi, I'm Trymore Mhlanga</h1>
+    <h2>I'm a <span class="typing"></span></h2>
 
     <p style="max-width: 900px; margin: 1.5rem auto;">
-      I am a First-Class Honours Statistician, Aspiring Data Scientist and Machine Learning Practitioner specializing in building
-      interpretable, production-grade predictive systems across finance, media analytics, customer intelligence, and
-      applied research. My work bridges statistical theory, data engineering and real-world deployment.
+      First-Class Honours Statistician, aspiring Data Scientist & Machine Learning Engineer. I design predictive and analytical systems
+      that transform complex datasets into actionable business insights. My expertise bridges statistical theory, applied machine learning,
+      and production-ready deployment to solve real-world problems across finance, media analytics, and customer intelligence.
     </p>
 
     <div class="hero-buttons">
@@ -243,5 +243,42 @@
 </section>
 
 <script src="assets/js/main.js"></script>
+<script>
+// ===== HERO TYPING ANIMATION =====
+const roles = [
+  "Statistician",
+  "Data Analyst",
+  "Machine Learning Practitioner",
+  "Python | R | SQL",
+  "Streamlit | Power BI | Tableau"
+];
+
+let index = 0;
+let charIndex = 0;
+const typingElement = document.querySelector(".typing");
+
+function type() {
+  if (charIndex < roles[index].length) {
+    typingElement.textContent += roles[index][charIndex];
+    charIndex++;
+    setTimeout(type, 120);
+  } else {
+    setTimeout(erase, 1500);
+  }
+}
+
+function erase() {
+  if (charIndex > 0) {
+    typingElement.textContent = roles[index].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(erase, 60);
+  } else {
+    index = (index + 1) % roles.length;
+    setTimeout(type, 500);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", type);
+</script>
 </body>
 </html>
