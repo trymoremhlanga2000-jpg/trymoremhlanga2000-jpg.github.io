@@ -13,18 +13,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-
-/* ===============================
-   SECTION CARD LAYOUT (STRUCTURAL ONLY)
-   =============================== */
-.section-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  padding: 3rem;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-}
-
 // ===============================
 // Typing Effect (Hero Title)
 // ===============================
