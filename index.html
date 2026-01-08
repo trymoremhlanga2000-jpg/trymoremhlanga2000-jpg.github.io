@@ -1,143 +1,64 @@
-<!-- ===================== FIXED LEFT NAVIGATION ===================== -->
-<nav class="side-nav">
-  <div class="nav-brand">Trymore Mhlanga</div>
-  <ul class="nav-links">
-    <li><a href="#hero" class="active">Home</a></li>
-    <li><a href="#profile">Profile</a></li>
-    <li><a href="#capabilities">Capabilities</a></li>
-    <li><a href="#projects">Case Studies</a></li>
-    <li><a href="#contact">Engage</a></li>
-  </ul>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trymore Mhlanga | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">Trymore Mhlanga</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">Profile</a></li>
+      <li><a href="#skills">Capabilities</a></li>
+      <li><a href="#projects">Case Studies</a></li>
+      <li><a href="#contact">Engage</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- ===================== HERO (HOME) ===================== -->
-<section id="hero" class="hero-section">
-  <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-photo">
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-content">
 
-  <h1>Trymore Mhlanga</h1>
-  <h2><span class="typing"></span></h2>
+    <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-photo">
 
-  <p class="hero-text">
-    First-Class Honours Statistician, Aspiring Data Scientist & Machine Learning Engineer. I design predictive and analytical systems
-    that transform complex datasets into actionable business insights. My expertise bridges statistical theory, applied machine learning,
-    and production-ready deployment to solve real-world problems across finance, media analytics, and customer intelligence.
-  </p>
+    <h1>Trymore Mhlanga</h1>
+    <h2><span id="typing-text"></span></h2>
 
-  <div class="hero-buttons">
-    <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="btn">View GitHub</a>
-    <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="btn btn-outline">LinkedIn</a>
+    <p>
+      First-Class Honours Statistician, Aspiring Data Scientist & Machine Learning Engineer. I design predictive and analytical systems
+      that transform complex datasets into actionable business insights. My expertise bridges statistical theory, applied machine learning,
+      and production-ready deployment to solve real-world problems across finance, media analytics, and customer intelligence.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="btn">View GitHub</a>
+      <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="btn btn-outline">LinkedIn</a>
+    </div>
+
   </div>
 </section>
 
-<!-- ===================== STYLES ===================== -->
-<style>
-  body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: #0b0f14;
-    color: #eaeaea;
-  }
-
-  /* SIDE NAV */
-  .side-nav {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 240px;
-    height: 100vh;
-    background: #070b10;
-    border-right: 1px solid rgba(255,255,255,0.08);
-    padding: 2rem 1.5rem;
-    box-sizing: border-box;
-  }
-
-  .nav-brand {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 2.5rem;
-  }
-
-  .nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .nav-links li {
-    margin-bottom: 1.2rem;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: #bfc7d5;
-    font-size: 0.95rem;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: #1ddcff;
-  }
-
-  /* HERO */
-  .hero-section {
-    margin-left: 240px;
-    min-height: 100vh;
-    padding: 4rem 2rem;
-    text-align: center;
-    background: radial-gradient(circle at top, #121a24, #05070a);
-  }
-
-  .profile-photo {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 3px solid #1ddcff;
-    object-fit: cover;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-text {
-    max-width: 900px;
-    margin: 1.5rem auto;
-    line-height: 1.7;
-    color: #c9d1e3;
-  }
-
-  .hero-buttons {
-    margin-top: 2rem;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.7rem 1.6rem;
-    margin: 0 0.5rem;
-    border-radius: 30px;
-    background: #1ddcff;
-    color: #000;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: #1ddcff;
-    border: 1px solid #1ddcff;
-  }
-</style>
-
-
-
-
-
-<!-- ===================== ABOUT ===================== -->
+<!-- ===================== PROFILE ===================== -->
 <section id="about">
-  <div class="container">
+  <div class="container section-card">
     <h2>Profile</h2>
 
     <p>
       I am trained in Applied Statistics with deep specialization in probabilistic modeling, supervised learning,
-      forecasting, experimental design and statistical inference. I aspire to build a strong career in Data analysis, data science and machine learning engineering where gain exposure to modern technologies in the vast landscape of data science and artificial intelligence.  My work emphasizes not just accuracy, but
+      forecasting, experimental design and statistical inference. I aspire to build a strong career in Data analysis, data science and machine learning engineering where gain exposure to modern technologies in the vast landscape of data science and artificial intelligence. My work emphasizes not just accuracy, but
       interpretability, stability, and decision value.
     </p>
 
@@ -156,7 +77,7 @@
 
 <!-- ===================== SKILLS ===================== -->
 <section id="skills">
-  <div class="container">
+  <div class="container section-card">
     <h2>Technical Capabilities</h2>
 
     <h3>Programming & Querying</h3>
@@ -199,7 +120,7 @@
   <div class="container">
     <h2>Case Studies</h2>
 
-    <!-- PROJECT 1 -->
+     <!-- PROJECT 1 -->
     <article class="project-case">
       <h3>Credit Risk Prediction System</h3>
       <p><strong>Domain:</strong> Financial Risk Modeling</p>
@@ -305,66 +226,31 @@
       <a href="https://github.com/trymoremhlanga2000-jpg/Sine-Type-II-Half-Logistic-Weibull-Distribution" target="_blank">View Repository</a>
     </article>
 
+
   </div>
 </section>
 
 <!-- ===================== CONTACT ===================== -->
 <section id="contact">
-  <div class="container">
+  <div class="container section-card">
     <h2>Engage</h2>
+
     <p>
       If you are looking for a technically rigorous, analytically grounded, and deployment-ready data professional,
       I welcome collaboration.
     </p>
 
     <div class="contact-links">
-      <a href="mailto:trymoremhlanga5021@gmail.com"><i class="fas fa-envelope"></i>Email</a>
-      <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a>
-      <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+      <a href="mailto:trymoremhlanga5021@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank">GitHub</a>
     </div>
 
-    <p class="footer-note">&copy; 2026 Trymore Mhlanga. All rights reserved.</p>
+    <p class="footer-note">&copy; <span id="year"></span> Trymore Mhlanga. All rights reserved.</p>
   </div>
 </section>
 
 <script src="assets/js/main.js"></script>
-<script>
-// ===== HERO TYPING ANIMATION =====
-const roles = [
-  "Statistician",
-  "Data Analyst",
-  "Machine Learning Practitioner",
-  "Python | R | SQL",
-  "Streamlit | Power BI | Tableau"
-];
-
-let index = 0;
-let charIndex = 0;
-const typingElement = document.querySelector(".typing");
-
-function type() {
-  if (charIndex < roles[index].length) {
-    typingElement.textContent += roles[index][charIndex];
-    charIndex++;
-    setTimeout(type, 120);
-  } else {
-    setTimeout(erase, 1500);
-  }
-}
-
-function erase() {
-  if (charIndex > 0) {
-    typingElement.textContent = roles[index].substring(0, charIndex - 1);
-    charIndex--;
-    setTimeout(erase, 60);
-  } else {
-    index = (index + 1) % roles.length;
-    setTimeout(type, 500);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", type);
-</script>
 </body>
 </html>
 
