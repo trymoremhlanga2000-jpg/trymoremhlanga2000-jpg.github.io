@@ -6,11 +6,765 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Trymore Mhlanga – First Class Honours Applied Statistician, Data Scientist and Machine Learning Engineer. Specialized in predictive modeling, risk analytics, and production-ready ML systems.">
   
-
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* ===================== GLOBAL STYLES ===================== */
+    :root {
+      --primary: #2d3748;
+      --secondary: #4a5568;
+      --accent: #667eea;
+      --accent-dark: #5a67d8;
+      --light: #f7fafc;
+      --light-gray: #e2e8f0;
+      --dark: #1a202c;
+      --success: #48bb78;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--secondary);
+      background-color: #f9fafb;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--primary);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      border-radius: 2px;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--light-gray);
+    }
+
+    /* ===================== SIDEBAR NAV ===================== */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 260px;
+      background: white;
+      border-right: 1px solid var(--light-gray);
+      padding: 2rem 1.5rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand h3 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar-brand span {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .sidebar-nav {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .sidebar-nav a {
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: var(--secondary);
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .sidebar-nav a:hover {
+      background: var(--light);
+      color: var(--accent);
+    }
+
+    /* ===================== MAIN CONTENT ===================== */
+    .main-content {
+      margin-left: 260px;
+      min-height: 100vh;
+    }
+
+    /* ===================== NAVBAR ===================== */
+    .navbar {
+      display: none;
+      background: white;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--light-gray);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--secondary);
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ===================== HERO ===================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 0;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: var(--box-shadow);
+      margin-bottom: 2rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content h2 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--secondary);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===================== SKILLS ===================== */
+    #skills .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    #skills h3 {
+      font-size: 1.4rem;
+      margin: 2.5rem 0 1rem;
+      color: var(--primary);
+    }
+
+    #skills h3:first-child {
+      margin-top: 0;
+    }
+
+    /* ===================== PROJECTS ===================== */
+    #projects {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .section-title {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 2.8rem;
+      font-weight: 800;
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      border-radius: 3px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      margin: 2rem auto 4rem;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--light-gray);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--light-gray);
+    }
+
+    .project-info {
+      flex: 1;
+    }
+
+    .project-title {
+      color: var(--primary);
+      font-size: 1.9rem;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .project-domain {
+      color: var(--secondary);
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .project-domain strong {
+      color: var(--primary);
+    }
+
+    .project-image {
+      flex: 0 0 340px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-details {
+      margin-top: 1.5rem;
+    }
+
+    .project-objective {
+      color: var(--primary);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #edf2f7 100%);
+      border-left: 5px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-weight: 500;
+    }
+
+    .project-objective strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .project-description {
+      color: var(--secondary);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    .technical-highlights,
+    .performance-metrics {
+      margin: 2rem 0;
+    }
+
+    .technical-highlights h4,
+    .performance-metrics h4 {
+      color: var(--primary);
+      font-size: 1.35rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--light-gray);
+      display: inline-block;
+    }
+
+    .technical-highlights ul,
+    .performance-metrics ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .technical-highlights li,
+    .performance-metrics li {
+      padding: 0.8rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: var(--secondary);
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .technical-highlights li::before,
+    .performance-metrics li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .technical-highlights strong,
+    .performance-metrics strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .tech-stack-container {
+      margin: 3rem 0;
+      padding: 2rem;
+      background: var(--light);
+      border-radius: 12px;
+      border: 1px solid var(--light-gray);
+    }
+
+    .tech-stack-container h4 {
+      color: var(--primary);
+      font-size: 1.35rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .tech-stack img {
+      height: 35px;
+      transition: var(--transition);
+      border-radius: 6px;
+    }
+
+    .tech-stack img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--light-gray);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.05rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--light-gray);
+      padding: 14px 30px;
+      font-size: 1.05rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--light);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===================== EXPERIENCE & EDUCATION ===================== */
+    #experience h3,
+    #education h3 {
+      font-size: 1.6rem;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--primary);
+    }
+
+    #experience p em,
+    #education p em {
+      color: var(--secondary);
+      font-style: italic;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* ===================== CONTACT ===================== */
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      padding: 12px 28px;
+      background: var(--light);
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--accent);
+      border: 2px solid var(--light-gray);
+      transition: var(--transition);
+    }
+
+    .contact-links a:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--light-gray);
+      color: var(--secondary);
+      font-size: 0.95rem;
+    }
+
+    /* ===================== RESPONSIVE DESIGN ===================== */
+    @media (max-width: 1200px) {
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+      
+      .navbar {
+        display: block;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .project-header {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .project-image {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .project-title {
+        font-size: 1.7rem;
+      }
+      
+      h2 {
+        font-size: 2.2rem;
+      }
+      
+      .section-title {
+        font-size: 2.4rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .hero-content h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-card {
+        padding: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1.1rem;
+        margin: 1.5rem auto 3rem;
+      }
+      
+      .project-links {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+      
+      .hero-content h2 {
+        font-size: 1.3rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      section {
+        padding: 60px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .project-card {
+        padding: 1.5rem;
+      }
+      
+      .project-title {
+        font-size: 1.5rem;
+      }
+      
+      .tech-stack img {
+        height: 30px;
+      }
+      
+      .section-card {
+        padding: 2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .project-card:nth-child(2) { animation-delay: 0.1s; }
+    .project-card:nth-child(3) { animation-delay: 0.2s; }
+    .project-card:nth-child(4) { animation-delay: 0.3s; }
+    .project-card:nth-child(5) { animation-delay: 0.4s; }
+    .project-card:nth-child(6) { animation-delay: 0.5s; }
+  </style>
 </head>
 
 <body>
@@ -19,7 +773,7 @@
   <aside class="sidebar">
     <div class="sidebar-brand">
       <h3>Trymore Mhlanga</h3>
-      <span>Applied Statistician</span>
+      <span>Applied Statistician & Data Scientist</span>
     </div>
 
     <nav class="sidebar-nav">
@@ -29,7 +783,7 @@
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
-      <a href="#contact">Engage</a>
+      <a href="#contact">Contact</a>
     </nav>
   </aside>
 
@@ -47,873 +801,647 @@
           <li><a href="#projects">Case Studies</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#education">Education</a></li>
-          <li><a href="#contact">Engage</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </nav>
 
     <!-- ===================== HERO ===================== -->
     <section id="hero">
-      <div class="hero-content">
-        <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-photo" />
+      <div class="container">
+        <div class="hero-content">
+          <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-photo" />
 
-        <h1>Trymore Mhlanga</h1>
-        <h2><span id="typing-text"></span></h2>
+          <h1>Trymore Mhlanga</h1>
+          <h2>Applied Statistician & Data Scientist</h2>
 
-        <p>
-          First-Class Honours Applied Statistician, Data Scientist and Machine Learning Engineer.
-          I design rigorous, interpretable and production-ready analytical systems that transform
-          complex datasets into actionable insights across finance, media analytics and customer intelligence.
-        </p>
+          <p>
+            First-Class Honours Applied Statistician specializing in predictive modeling, 
+            machine learning, and data-driven decision systems. I transform complex datasets 
+            into actionable insights and production-ready analytical solutions across finance, 
+            media, and customer intelligence domains.
+          </p>
 
-        <div class="hero-buttons">
-          <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="btn">View GitHub</a>
-          <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="btn btn-outline">LinkedIn</a>
+          <div class="hero-buttons">
+            <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="btn">
+              <i class="fab fa-github"></i> View GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="btn btn-outline">
+              <i class="fab fa-linkedin"></i> LinkedIn Profile
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===================== PROFILE ===================== -->
     <section id="about">
-      <div class="container section-card">
-        <h2>Professional Profile</h2>
-        <p>
-          I am a Statistician with a strong foundation in probability theory, predictive modeling,
-          statistical inference and analytical problem-solving. My expertise spans the complete data
-          science lifecycle, from data collection, engineering and transformation to modeling,
-          evaluation, deployment and monitoring.
-        </p>
-        <p>
-          I specialize in supervised learning, forecasting, hypothesis testing and experimental design,
-          with a strong emphasis on interpretability, robustness and business relevance.
-          I am proficient in translating complex datasets into clear reports, dashboards and
-          executive-level recommendations that support data-driven decision-making.
-        </p>
-        <p>
-          My professional and academic work includes credit risk modeling, customer churn analysis,
-          media analytics and statistical research. I am particularly interested in building scalable
-          ML systems that balance theoretical rigor with real-world impact.
-        </p>
+      <div class="container">
+        <div class="section-card">
+          <h2>Professional Profile</h2>
+          <p>
+            I am a Statistician with a strong foundation in probability theory, predictive modeling,
+            statistical inference and analytical problem-solving. My expertise spans the complete data
+            science lifecycle, from data collection, engineering and transformation to modeling,
+            evaluation, deployment and monitoring.
+          </p>
+          <p>
+            I specialize in supervised learning, forecasting, hypothesis testing and experimental design,
+            with a strong emphasis on interpretability, robustness and business relevance.
+            I am proficient in translating complex datasets into clear reports, dashboards and
+            executive-level recommendations that support data-driven decision-making.
+          </p>
+          <p>
+            My professional and academic work includes credit risk modeling, customer churn analysis,
+            media analytics and statistical research. I am particularly interested in building scalable
+            ML systems that balance theoretical rigor with real-world impact.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- ===================== SKILLS ===================== -->
     <section id="skills">
-      <div class="container section-card">
-        <h2>Technical Capabilities</h2>
+      <div class="container">
+        <div class="section-card">
+          <h2>Technical Capabilities</h2>
 
-        <h3>Programming & Querying</h3>
-        <div class="tech-stack">
-          <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-          <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" />
-          <img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
-        </div>
+          <h3>Programming & Querying</h3>
+          <div class="tech-stack">
+            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+            <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" />
+            <img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
+            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+          </div>
 
-        <h3>Machine Learning & Statistical Modeling</h3>
-        <div class="tech-stack">
-          <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
-          <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" />
-          <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" />
-          <img src="https://img.shields.io/badge/Statsmodels-5A5A5A?style=for-the-badge" />
-        </div>
+          <h3>Machine Learning & Statistical Modeling</h3>
+          <div class="tech-stack">
+            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
+            <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" />
+            <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" />
+            <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" />
+            <img src="https://img.shields.io/badge/Statsmodels-5A5A5A?style=for-the-badge" />
+            <img src="https://img.shields.io/badge/XGBoost-017CEE?style=for-the-badge&logo=xgboost&logoColor=white" />
+          </div>
 
-        <h3>Data Engineering & Visualization</h3>
-        <div class="tech-stack">
-          <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
-          <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" />
-          <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" />
-          <img src="https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge" />
-          <img src="https://img.shields.io/badge/Seaborn-2E6F95?style=for-the-badge" />
-        </div>
+          <h3>Data Engineering & Visualization</h3>
+          <div class="tech-stack">
+            <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+            <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" />
+            <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" />
+            <img src="https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge&logo=matplotlib&logoColor=white" />
+            <img src="https://img.shields.io/badge/Seaborn-2E6F95?style=for-the-badge" />
+            <img src="https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white" />
+          </div>
 
-        <h3>BI, Cloud & Deployment</h3>
-        <div class="tech-stack">
-          <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" />
-          <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" />
-          <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
-          <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-          <img src="https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" />
+          <h3>BI, Cloud & Deployment</h3>
+          <div class="tech-stack">
+            <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" />
+            <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" />
+            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
+            <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+            <img src="https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" />
+            <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" />
+          </div>
         </div>
       </div>
     </section>
 
-<!-- =====================PROJECTS ===================== -->
-<section id="projects">
-  <div class="container">
-    <h2 class="section-title">Technical Projects & Studies</h2>
-    <p class="section-subtitle">End-to-end data analytics and machine learning applications deployed with interactive interfaces</p>
+    <!-- ===================== PROJECTS ===================== -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Technical Projects & Case Studies</h2>
+        <p class="section-subtitle">End-to-end machine learning applications deployed with interactive interfaces</p>
 
-    <!-- Project 1: Credit Risk Assessment System -->
-    <article class="project-card">
-      <div class="project-header">
-        <div class="project-info">
-          <h3 class="project-title">Credit Risk Assessment System</h3>
-          <p class="project-domain"><strong>Domain:</strong> Financial Technology • Risk Management • Machine Learning</p>
-        </div>
-        <div class="project-image">
-          <img src="assets/credit-risk.PNG" alt="Credit Risk Dashboard Interface" loading="lazy">
-        </div>
-      </div>
-      
-      <div class="project-details">
-        <p class="project-objective"><strong>Objective:</strong> Develop a comprehensive credit scoring system that predicts customer default probability using multiple machine learning models with an interactive web interface for financial decision-makers.</p>
-        
-        <div class="project-description">
-          <p>This end-to-end credit risk system processes financial data through a complete ML pipeline from preprocessing to deployment. The application enables financial institutions to assess borrower risk in real-time with interpretable results.</p>
-          
-          <div class="technical-highlights">
-            <h4>Technical Implementation:</h4>
-            <ul>
-              <li><strong>Data Pipeline:</strong> Automated preprocessing handling missing values, outliers, and feature engineering with Pandas workflows</li>
-              <li><strong>Model Ensemble:</strong> Comparative analysis of 14+ machine learning models including Logistic Regression, Random Forest, and Gradient Boosting</li>
-              <li><strong>Feature Engineering:</strong> Created financial ratios, payment history metrics, and behavioral scoring features</li>
-              <li><strong>Model Optimization:</strong> Hyperparameter tuning with cross-validation to optimize for precision and recall balance</li>
-              <li><strong>Serialization:</strong> Complete pipeline persistence using pickle for reproducible predictions</li>
-              <li><strong>Interactive Interface:</strong> Streamlit application with real-time prediction capabilities and risk visualization</li>
-            </ul>
+        <!-- Project 1: Credit Risk Assessment System -->
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-info">
+              <h3 class="project-title">Credit Risk Assessment System</h3>
+              <p class="project-domain"><strong>Domain:</strong> Financial Technology • Risk Management • Machine Learning</p>
+            </div>
+            <div class="project-image">
+              <img src="assets/credit-risk.PNG" alt="Credit Risk Dashboard Interface" loading="lazy">
+            </div>
           </div>
           
-          <div class="performance-metrics">
-            <h4>Performance & Results:</h4>
-            <ul>
-              <li>Model accuracy: Up to 92% on validation datasets</li>
-              <li>ROC-AUC score: 0.94 for best-performing ensemble model</li>
-              <li>Feature importance analysis for explainable AI decisions</li>
-              <li>Real-time prediction latency under 2 seconds</li>
-            </ul>
+          <div class="project-details">
+            <p class="project-objective"><strong>Objective:</strong> Develop a comprehensive credit scoring system that predicts customer default probability using multiple machine learning models with an interactive web interface for financial decision-makers.</p>
+            
+            <div class="project-description">
+              <p>This end-to-end credit risk system processes financial data through a complete ML pipeline from preprocessing to deployment. The application enables financial institutions to assess borrower risk in real-time with interpretable results.</p>
+              
+              <div class="technical-highlights">
+                <h4>Technical Implementation:</h4>
+                <ul>
+                  <li><strong>Data Pipeline:</strong> Automated preprocessing handling missing values, outliers, and feature engineering with Pandas workflows</li>
+                  <li><strong>Model Ensemble:</strong> Comparative analysis of 14+ machine learning models including Logistic Regression, Random Forest, and Gradient Boosting</li>
+                  <li><strong>Feature Engineering:</strong> Created financial ratios, payment history metrics, and behavioral scoring features</li>
+                  <li><strong>Model Optimization:</strong> Hyperparameter tuning with cross-validation to optimize for precision and recall balance</li>
+                  <li><strong>Serialization:</strong> Complete pipeline persistence using pickle for reproducible predictions</li>
+                  <li><strong>Interactive Interface:</strong> Streamlit application with real-time prediction capabilities and risk visualization</li>
+                </ul>
+              </div>
+              
+              <div class="performance-metrics">
+                <h4>Performance & Results:</h4>
+                <ul>
+                  <li>Model accuracy: Up to 92% on validation datasets</li>
+                  <li>ROC-AUC score: 0.94 for best-performing ensemble model</li>
+                  <li>Feature importance analysis for explainable AI decisions</li>
+                  <li>Real-time prediction latency under 2 seconds</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tech-stack-container">
+              <h4>Technology Stack:</h4>
+              <div class="tech-stack">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+                <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
+                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+                <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
+                <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
+              </div>
+            </div>
+            
+            <div class="project-links">
+              <a href="https://github.com/trymoremhlanga2000-jpg/Credit-risk" target="_blank" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Source Code
+              </a>
+              <a href="#" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Deployment
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="tech-stack-container">
-          <h4>Technology Stack:</h4>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-            <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
-            <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-            <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
-            <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
-          </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://github.com/trymoremhlanga2000-jpg/Credit-risk" target="_blank" class="btn btn-primary">
-            <i class="fas fa-code"></i> View Source Code
-          </a>
-          <a href="#" target="_blank" class="btn btn-secondary">
-            <i class="fas fa-external-link-alt"></i> Live Deployment
-          </a>
-        </div>
-      </div>
-    </article>
+        </article>
 
-    <!-- Project 2: Customer Churn Prediction System -->
-    <article class="project-card">
-      <div class="project-header">
-        <div class="project-info">
-          <h3 class="project-title">Customer Churn Prediction System</h3>
-          <p class="project-domain"><strong>Domain:</strong> Customer Intelligence • Retention Analytics • Business Intelligence</p>
-        </div>
-        <div class="project-image">
-          <img src="assets/customer-churn.PNG" alt="Customer Churn Prediction Dashboard" loading="lazy">
-        </div>
-      </div>
-      
-      <div class="project-details">
-        <p class="project-objective"><strong>Objective:</strong> Build a machine learning system to identify at-risk customers in subscription-based services, enabling proactive retention strategies with interpretable predictions.</p>
-        
-        <div class="project-description">
-          <p>This system provides telecom companies with actionable insights to reduce customer attrition. The modular pipeline handles class imbalance and provides business stakeholders with an intuitive interface.</p>
-          
-          <div class="technical-highlights">
-            <h4>Technical Implementation:</h4>
-            <ul>
-              <li><strong>Data Processing:</strong> Automated Kaggle API integration for dataset access with comprehensive cleaning pipeline</li>
-              <li><strong>Class Imbalance Handling:</strong> Implemented SMOTE (Synthetic Minority Over-sampling Technique) to address skewed churn distribution</li>
-              <li><strong>Model Comparison:</strong> Systematic evaluation of Logistic Regression vs. Random Forest with comprehensive metrics</li>
-              <li><strong>Feature Encoding:</strong> OneHotEncoding for categorical variables and StandardScaler for numerical features</li>
-              <li><strong>Model Interpretation:</strong> Coefficient analysis for Logistic Regression and feature importance for Random Forest</li>
-              <li><strong>Production Pipeline:</strong> Complete serialization of models and preprocessing steps using pickle</li>
-            </ul>
+        <!-- Project 2: Customer Churn Prediction System -->
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-info">
+              <h3 class="project-title">Customer Churn Prediction System</h3>
+              <p class="project-domain"><strong>Domain:</strong> Customer Intelligence • Retention Analytics • Business Intelligence</p>
+            </div>
+            <div class="project-image">
+              <img src="assets/customer-churn.PNG" alt="Customer Churn Prediction Dashboard" loading="lazy">
+            </div>
           </div>
           
-          <div class="performance-metrics">
-            <h4>Performance & Results:</h4>
-            <ul>
-              <li>ROC-AUC: 0.91 for Random Forest model</li>
-              <li>Recall optimization to identify maximum actual churners</li>
-              <li>Comprehensive evaluation with precision, recall, F1-score, and confusion matrices</li>
-              <li>Streamlit deployment with user-friendly input forms and real-time predictions</li>
-            </ul>
+          <div class="project-details">
+            <p class="project-objective"><strong>Objective:</strong> Build a machine learning system to identify at-risk customers in subscription-based services, enabling proactive retention strategies with interpretable predictions.</p>
+            
+            <div class="project-description">
+              <p>This system provides telecom companies with actionable insights to reduce customer attrition. The modular pipeline handles class imbalance and provides business stakeholders with an intuitive interface.</p>
+              
+              <div class="technical-highlights">
+                <h4>Technical Implementation:</h4>
+                <ul>
+                  <li><strong>Data Processing:</strong> Automated Kaggle API integration for dataset access with comprehensive cleaning pipeline</li>
+                  <li><strong>Class Imbalance Handling:</strong> Implemented SMOTE (Synthetic Minority Over-sampling Technique) to address skewed churn distribution</li>
+                  <li><strong>Model Comparison:</strong> Systematic evaluation of Logistic Regression vs. Random Forest with comprehensive metrics</li>
+                  <li><strong>Feature Encoding:</strong> OneHotEncoding for categorical variables and StandardScaler for numerical features</li>
+                  <li><strong>Model Interpretation:</strong> Coefficient analysis for Logistic Regression and feature importance for Random Forest</li>
+                  <li><strong>Production Pipeline:</strong> Complete serialization of models and preprocessing steps using pickle</li>
+                </ul>
+              </div>
+              
+              <div class="performance-metrics">
+                <h4>Performance & Results:</h4>
+                <ul>
+                  <li>ROC-AUC: 0.91 for Random Forest model</li>
+                  <li>Recall optimization to identify maximum actual churners</li>
+                  <li>Comprehensive evaluation with precision, recall, F1-score, and confusion matrices</li>
+                  <li>Streamlit deployment with user-friendly input forms and real-time predictions</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tech-stack-container">
+              <h4>Technology Stack:</h4>
+              <div class="tech-stack">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+                <img src="https://img.shields.io/badge/imbalanced--learn-FF6F61?style=for-the-badge" alt="Imbalanced-learn">
+                <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+                <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
+              </div>
+            </div>
+            
+            <div class="project-links">
+              <a href="https://github.com/trymoremhlanga2000-jpg/Customer-Churn" target="_blank" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Source Code
+              </a>
+              <a href="https://customer-churn-bytrymore.streamlit.app/" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Deployment
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="tech-stack-container">
-          <h4>Technology Stack:</h4>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-            <img src="https://img.shields.io/badge/imbalanced--learn-FF6F61?style=for-the-badge" alt="Imbalanced-learn">
-            <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-            <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
-          </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://github.com/trymoremhlanga2000-jpg/Customer-Churn" target="_blank" class="btn btn-primary">
-            <i class="fas fa-code"></i> View Source Code
-          </a>
-          <a href="https://customer-churn-bytrymore.streamlit.app/" target="_blank" class="btn btn-secondary">
-            <i class="fas fa-external-link-alt"></i> Live Deployment
-          </a>
-        </div>
-      </div>
-    </article>
+        </article>
 
-    <!-- Project 3: Netflix Interactive Analytics Dashboard -->
-    <article class="project-card">
-      <div class="project-header">
-        <div class="project-info">
-          <h3 class="project-title">Netflix Interactive Analytics Dashboard</h3>
-          <p class="project-domain"><strong>Domain:</strong> Media Analytics • Business Intelligence • Data Visualization</p>
-        </div>
-        <div class="project-image">
-          <img src="assets/netflix-dashboard.PNG" alt="Netflix Analytics Dashboard" loading="lazy">
-        </div>
-      </div>
-      
-      <div class="project-details">
-        <p class="project-objective"><strong>Objective:</strong> Transform Netflix's content library into actionable insights through an interactive dashboard that analyzes content trends, genre preferences, and global production patterns.</p>
-        
-        <div class="project-description">
-          <p>This comprehensive analytics platform enables stakeholders to explore Netflix's 8,800+ title catalog through six interactive modules with real-time filtering and multi-dimensional analysis capabilities.</p>
-          
-          <div class="technical-highlights">
-            <h4>Dashboard Modules:</h4>
-            <ul>
-              <li><strong>Content Type Analysis:</strong> Donut charts with click-to-filter functionality for Movies vs TV Shows</li>
-              <li><strong>Temporal Analysis:</strong> Line charts tracking monthly, yearly, and decade-wise release patterns</li>
-              <li><strong>Genre Intelligence:</strong> Top genre identification with popularity metrics and engagement indicators</li>
-              <li><strong>Retention Analysis:</strong> Average duration by genre with comparative analysis across categories</li>
-              <li><strong>Duration Distribution:</strong> Histogram visualizations with statistical insights (mean, median)</li>
-              <li><strong>Geospatial Analysis:</strong> Interactive choropleth maps showing country-wise content production</li>
-            </ul>
+        <!-- Project 3: Netflix Interactive Analytics Dashboard -->
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-info">
+              <h3 class="project-title">Netflix Interactive Analytics Dashboard</h3>
+              <p class="project-domain"><strong>Domain:</strong> Media Analytics • Business Intelligence • Data Visualization</p>
+            </div>
+            <div class="project-image">
+              <img src="assets/netflix-dashboard.PNG" alt="Netflix Analytics Dashboard" loading="lazy">
+            </div>
           </div>
           
-          <div class="performance-metrics">
-            <h4>Key Features:</h4>
-            <ul>
-              <li>Real-time filtering by content type, genre, country, and release year</li>
-              <li>Interactive visualizations with hover effects, zoom, and responsive design</li>
-              <li>Professional UI/UX with clean layout and intuitive navigation</li>
-              <li>Optimized for both desktop and mobile viewing experiences</li>
-            </ul>
+          <div class="project-details">
+            <p class="project-objective"><strong>Objective:</strong> Transform Netflix's content library into actionable insights through an interactive dashboard that analyzes content trends, genre preferences, and global production patterns.</p>
+            
+            <div class="project-description">
+              <p>This comprehensive analytics platform enables stakeholders to explore Netflix's 8,800+ title catalog through six interactive modules with real-time filtering and multi-dimensional analysis capabilities.</p>
+              
+              <div class="technical-highlights">
+                <h4>Dashboard Modules:</h4>
+                <ul>
+                  <li><strong>Content Type Analysis:</strong> Donut charts with click-to-filter functionality for Movies vs TV Shows</li>
+                  <li><strong>Temporal Analysis:</strong> Line charts tracking monthly, yearly, and decade-wise release patterns</li>
+                  <li><strong>Genre Intelligence:</strong> Top genre identification with popularity metrics and engagement indicators</li>
+                  <li><strong>Retention Analysis:</strong> Average duration by genre with comparative analysis across categories</li>
+                  <li><strong>Duration Distribution:</strong> Histogram visualizations with statistical insights (mean, median)</li>
+                  <li><strong>Geospatial Analysis:</strong> Interactive choropleth maps showing country-wise content production</li>
+                </ul>
+              </div>
+              
+              <div class="performance-metrics">
+                <h4>Key Features:</h4>
+                <ul>
+                  <li>Real-time filtering by content type, genre, country, and release year</li>
+                  <li>Interactive visualizations with hover effects, zoom, and responsive design</li>
+                  <li>Professional UI/UX with clean layout and intuitive navigation</li>
+                  <li>Optimized for both desktop and mobile viewing experiences</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tech-stack-container">
+              <h4>Technology Stack:</h4>
+              <div class="tech-stack">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
+                <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
+                <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
+              </div>
+            </div>
+            
+            <div class="project-links">
+              <a href="https://github.com/trymoremhlanga2000-jpg/Netflix-Interactive-Dashboard" target="_blank" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Source Code
+              </a>
+              <a href="#" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Dashboard
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="tech-stack-container">
-          <h4>Technology Stack:</h4>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-            <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
-            <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
-            <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
-            <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
-          </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://github.com/trymoremhlanga2000-jpg/Netflix-Interactive-Dashboard" target="_blank" class="btn btn-primary">
-            <i class="fas fa-code"></i> View Source Code
-          </a>
-          <a href="#" target="_blank" class="btn btn-secondary">
-            <i class="fas fa-external-link-alt"></i> Live Dashboard
-          </a>
-        </div>
-      </div>
-    </article>
+        </article>
 
-    <!-- Project 4: Exam Score AI Predictor -->
-    <article class="project-card">
-      <div class="project-header">
-        <div class="project-info">
-          <h3 class="project-title">Exam Score AI Predictor</h3>
-          <p class="project-domain"><strong>Domain:</strong> Educational Technology • Deep Learning • Predictive Analytics</p>
-        </div>
-        <div class="project-image">
-          <img src="assets/exam-score.PNG" alt="Exam Score Prediction Dashboard" loading="lazy">
-        </div>
-      </div>
-      
-      <div class="project-details">
-        <p class="project-objective"><strong>Objective:</strong> Develop a deep learning application that predicts student exam scores based on academic behavior, study habits, and environmental factors with real-time predictions and improvement recommendations.</p>
-        
-        <div class="project-description">
-          <p>This TensorFlow-based neural network model processes 20,000+ student records to provide accurate score predictions (0-100) and personalized insights for educational stakeholders.</p>
-          
-          <div class="technical-highlights">
-            <h4>Technical Implementation:</h4>
-            <ul>
-              <li><strong>Deep Learning Architecture:</strong> Custom neural network built with TensorFlow/Keras for regression task</li>
-              <li><strong>Feature Engineering:</strong> 12+ input features including study hours, attendance, sleep quality, and exam difficulty</li>
-              <li><strong>Preprocessing Pipeline:</strong> LabelEncoder for categorical variables and Scikit-learn scaler for numerical features</li>
-              <li><strong>Model Optimization:</strong> Hyperparameter tuning for optimal architecture and training parameters</li>
-              <li><strong>Visualization System:</strong> Interactive Plotly gauge charts for intuitive score representation</li>
-              <li><strong>Performance Caching:</strong> Optimized model and scaler loading with caching for fast inference</li>
-            </ul>
+        <!-- Project 4: Exam Score AI Predictor -->
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-info">
+              <h3 class="project-title">Exam Score AI Predictor</h3>
+              <p class="project-domain"><strong>Domain:</strong> Educational Technology • Deep Learning • Predictive Analytics</p>
+            </div>
+            <div class="project-image">
+              <img src="assets/exam-score.PNG" alt="Exam Score Prediction Dashboard" loading="lazy">
+            </div>
           </div>
           
-          <div class="performance-metrics">
-            <h4>Application Features:</h4>
-            <ul>
-              <li>Real-time predictions with sub-second response time</li>
-              <li>Interactive gauge visualization showing predicted scores</li>
-              <li>Smart recommendations based on input patterns and predicted performance</li>
-              <li>Professional dashboard with custom CSS styling and responsive layout</li>
-              <li>Cached model loading for optimized application performance</li>
-            </ul>
+          <div class="project-details">
+            <p class="project-objective"><strong>Objective:</strong> Develop a deep learning application that predicts student exam scores based on academic behavior, study habits, and environmental factors with real-time predictions and improvement recommendations.</p>
+            
+            <div class="project-description">
+              <p>This TensorFlow-based neural network model processes 20,000+ student records to provide accurate score predictions (0-100) and personalized insights for educational stakeholders.</p>
+              
+              <div class="technical-highlights">
+                <h4>Technical Implementation:</h4>
+                <ul>
+                  <li><strong>Deep Learning Architecture:</strong> Custom neural network built with TensorFlow/Keras for regression task</li>
+                  <li><strong>Feature Engineering:</strong> 12+ input features including study hours, attendance, sleep quality, and exam difficulty</li>
+                  <li><strong>Preprocessing Pipeline:</strong> LabelEncoder for categorical variables and Scikit-learn scaler for numerical features</li>
+                  <li><strong>Model Optimization:</strong> Hyperparameter tuning for optimal architecture and training parameters</li>
+                  <li><strong>Visualization System:</strong> Interactive Plotly gauge charts for intuitive score representation</li>
+                  <li><strong>Performance Caching:</strong> Optimized model and scaler loading with caching for fast inference</li>
+                </ul>
+              </div>
+              
+              <div class="performance-metrics">
+                <h4>Application Features:</h4>
+                <ul>
+                  <li>Real-time predictions with sub-second response time</li>
+                  <li>Interactive gauge visualization showing predicted scores</li>
+                  <li>Smart recommendations based on input patterns and predicted performance</li>
+                  <li>Professional dashboard with custom CSS styling and responsive layout</li>
+                  <li>Cached model loading for optimized application performance</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tech-stack-container">
+              <h4>Technology Stack:</h4>
+              <div class="tech-stack">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow">
+                <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" alt="Keras">
+                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
+                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+                <img src="https://img.shields.io/badge/Joblib-00A3E0?style=for-the-badge" alt="Joblib">
+              </div>
+            </div>
+            
+            <div class="project-links">
+              <a href="https://github.com/trymoremhlanga2000-jpg/Exam-Score-Prediction" target="_blank" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Source Code
+              </a>
+              <a href="#" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Application
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="tech-stack-container">
-          <h4>Technology Stack:</h4>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow">
-            <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" alt="Keras">
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-            <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
-            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-            <img src="https://img.shields.io/badge/Joblib-00A3E0?style=for-the-badge" alt="Joblib">
-          </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://github.com/trymoremhlanga2000-jpg/Exam-Score-Prediction" target="_blank" class="btn btn-primary">
-            <i class="fas fa-code"></i> View Source Code
-          </a>
-          <a href="#" target="_blank" class="btn btn-secondary">
-            <i class="fas fa-external-link-alt"></i> Live Application
-          </a>
-        </div>
-      </div>
-    </article>
+        </article>
 
-    <!-- Project 5: Loan Default Prediction System -->
-    <article class="project-card">
-      <div class="project-header">
-        <div class="project-info">
-          <h3 class="project-title">Loan Default Prediction System</h3>
-          <p class="project-domain"><strong>Domain:</strong> Banking Technology • Credit Scoring • Risk Assessment</p>
-        </div>
-        <div class="project-image">
-          <img src="assets/loan-approval.PNG" alt="Loan Default Prediction Interface" loading="lazy">
-        </div>
-      </div>
-      
-      <div class="project-details">
-        <p class="project-objective"><strong>Objective:</strong> Analyze key factors influencing bank loan approval decisions and build a multi-model prediction system to assess loan default likelihood with an interactive GUI.</p>
-        
-        <div class="project-description">
-          <p>This comprehensive analysis compares six machine learning algorithms to identify the most effective model for predicting loan approval outcomes based on applicant financial profiles.</p>
-          
-          <div class="technical-highlights">
-            <h4>Model Comparison Framework:</h4>
-            <ul>
-              <li><strong>Algorithm Diversity:</strong> Implemented Logistic Regression, Decision Trees, Random Forest, K-Nearest Neighbors, XGBoost, and SMOTE for class balancing</li>
-              <li><strong>Feature Analysis:</strong> Identified key approval factors including income, credit history, employment status, and loan amount</li>
-              <li><strong>Model Evaluation:</strong> Comprehensive metrics comparison including accuracy, precision, recall, and F1-score</li>
-              <li><strong>Interactive GUI:</strong> Streamlit application enabling users to input applicant data and view model predictions</li>
-              <li><strong>Model Serialization:</strong> Multiple pickle files for different trained models allowing A/B testing</li>
-            </ul>
+        <!-- Project 5: Loan Default Prediction System -->
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-info">
+              <h3 class="project-title">Loan Default Prediction System</h3>
+              <p class="project-domain"><strong>Domain:</strong> Banking Technology • Credit Scoring • Risk Assessment</p>
+            </div>
+            <div class="project-image">
+              <img src="assets/loan-approval.PNG" alt="Loan Default Prediction Interface" loading="lazy">
+            </div>
           </div>
           
-          <div class="performance-metrics">
-            <h4>Key Insights:</h4>
-            <ul>
-              <li>XGBoost demonstrated highest predictive accuracy for imbalanced loan datasets</li>
-              <li>Credit history and debt-to-income ratio identified as most significant approval factors</li>
-              <li>SMOTE implementation improved minority class prediction by 15%</li>
-              <li>Interactive interface enables loan officers to simulate approval scenarios</li>
-            </ul>
+          <div class="project-details">
+            <p class="project-objective"><strong>Objective:</strong> Analyze key factors influencing bank loan approval decisions and build a multi-model prediction system to assess loan default likelihood with an interactive GUI.</p>
+            
+            <div class="project-description">
+              <p>This comprehensive analysis compares six machine learning algorithms to identify the most effective model for predicting loan approval outcomes based on applicant financial profiles.</p>
+              
+              <div class="technical-highlights">
+                <h4>Model Comparison Framework:</h4>
+                <ul>
+                  <li><strong>Algorithm Diversity:</strong> Implemented Logistic Regression, Decision Trees, Random Forest, K-Nearest Neighbors, XGBoost, and SMOTE for class balancing</li>
+                  <li><strong>Feature Analysis:</strong> Identified key approval factors including income, credit history, employment status, and loan amount</li>
+                  <li><strong>Model Evaluation:</strong> Comprehensive metrics comparison including accuracy, precision, recall, and F1-score</li>
+                  <li><strong>Interactive GUI:</strong> Streamlit application enabling users to input applicant data and view model predictions</li>
+                  <li><strong>Model Serialization:</strong> Multiple pickle files for different trained models allowing A/B testing</li>
+                </ul>
+              </div>
+              
+              <div class="performance-metrics">
+                <h4>Key Insights:</h4>
+                <ul>
+                  <li>XGBoost demonstrated highest predictive accuracy for imbalanced loan datasets</li>
+                  <li>Credit history and debt-to-income ratio identified as most significant approval factors</li>
+                  <li>SMOTE implementation improved minority class prediction by 15%</li>
+                  <li>Interactive interface enables loan officers to simulate approval scenarios</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tech-stack-container">
+              <h4>Technology Stack:</h4>
+              <div class="tech-stack">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+                <img src="https://img.shields.io/badge/XGBoost-017CEE?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost">
+                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+                <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
+                <img src="https://img.shields.io/badge/imbalanced--learn-FF6F61?style=for-the-badge" alt="Imbalanced-learn">
+              </div>
+            </div>
+            
+            <div class="project-links">
+              <a href="https://github.com/trymoremhlanga2000-jpg/Loan-Default-Prediction" target="_blank" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Source Code
+              </a>
+              <a href="https://loan-default-prediction-ryn.streamlit.app/" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Deployment
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="tech-stack-container">
-          <h4>Technology Stack:</h4>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-            <img src="https://img.shields.io/badge/XGBoost-017CEE?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost">
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-            <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
-            <img src="https://img.shields.io/badge/imbalanced--learn-FF6F61?style=for-the-badge" alt="Imbalanced-learn">
-          </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://github.com/trymoremhlanga2000-jpg/Loan-Default-Prediction" target="_blank" class="btn btn-primary">
-            <i class="fas fa-code"></i> View Source Code
-          </a>
-          <a href="https://loan-default-prediction-ryn.streamlit.app/" target="_blank" class="btn btn-secondary">
-            <i class="fas fa-external-link-alt"></i> Live Deployment
-          </a>
-        </div>
-      </div>
-    </article>
+        </article>
 
-    <!-- Project 6: Statistical Distribution Research Framework -->
-    <article class="project-card">
-      <div class="project-header">
-        <div class="project-info">
-          <h3 class="project-title">Sine-Type II Half-Logistic Weibull Distribution Framework</h3>
-          <p class="project-domain"><strong>Domain:</strong> Statistical Research • Probability Theory • Mathematical Modeling</p>
-        </div>
-        <div class="project-image">
-          <img src="assets/distribution.PNG" alt="Statistical Distribution Visualizations" loading="lazy">
-        </div>
-      </div>
-      
-      <div class="project-details">
-        <p class="project-objective"><strong>Objective:</strong> Design and implement a novel probability distribution for modeling complex real-world phenomena with enhanced flexibility for reliability analysis, survival modeling, and financial data applications.</p>
-        
-        <div class="project-description">
-          <p>This research-grade implementation presents the Sine-Type II Half-Logistic Weibull (STIIHLW) distribution through a three-stage transformation process with interactive visualization of statistical functions.</p>
-          
-          <div class="technical-highlights">
-            <h4>Theoretical Foundation:</h4>
-            <ul>
-              <li><strong>Base Distribution:</strong> Weibull distribution for reliability and lifetime data analysis</li>
-              <li><strong>Type II Half-Logistic Transformation:</strong> Enhances skewness control and tail behavior while preserving support</li>
-              <li><strong>Sine Transformation:</strong> Introduces non-monotonic hazard functions and multi-modal behavior</li>
-              <li><strong>Mathematical Implementation:</strong> Complete derivation of PDF, CDF, survival, and hazard functions</li>
-              <li><strong>Parameter Estimation:</strong> Maximum Likelihood Estimation and Bayesian methods for distribution fitting</li>
-            </ul>
+        <!-- Project 6: Statistical Distribution Research Framework -->
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-info">
+              <h3 class="project-title">Sine-Type II Half-Logistic Weibull Distribution Framework</h3>
+              <p class="project-domain"><strong>Domain:</strong> Statistical Research • Probability Theory • Mathematical Modeling</p>
+            </div>
+            <div class="project-image">
+              <img src="assets/distribution.PNG" alt="Statistical Distribution Visualizations" loading="lazy">
+            </div>
           </div>
           
-          <div class="performance-metrics">
-            <h4>Visualization Framework:</h4>
-            <ul>
-              <li>Real-time parameter adjustment with immediate visualization updates</li>
-              <li>Comparative analysis with base Weibull distribution</li>
-              <li>Interactive plots for PDF, CDF, survival, and hazard functions</li>
-              <li>Clean mathematical structure with interpretable parameter effects</li>
-              <li>Mobile-responsive deployment via Streamlit Community Cloud</li>
-            </ul>
+          <div class="project-details">
+            <p class="project-objective"><strong>Objective:</strong> Design and implement a novel probability distribution for modeling complex real-world phenomena with enhanced flexibility for reliability analysis, survival modeling, and financial data applications.</p>
+            
+            <div class="project-description">
+              <p>This research-grade implementation presents the Sine-Type II Half-Logistic Weibull (STIIHLW) distribution through a three-stage transformation process with interactive visualization of statistical functions.</p>
+              
+              <div class="technical-highlights">
+                <h4>Theoretical Foundation:</h4>
+                <ul>
+                  <li><strong>Base Distribution:</strong> Weibull distribution for reliability and lifetime data analysis</li>
+                  <li><strong>Type II Half-Logistic Transformation:</strong> Enhances skewness control and tail behavior while preserving support</li>
+                  <li><strong>Sine Transformation:</strong> Introduces non-monotonic hazard functions and multi-modal behavior</li>
+                  <li><strong>Mathematical Implementation:</strong> Complete derivation of PDF, CDF, survival, and hazard functions</li>
+                  <li><strong>Parameter Estimation:</strong> Maximum Likelihood Estimation and Bayesian methods for distribution fitting</li>
+                </ul>
+              </div>
+              
+              <div class="performance-metrics">
+                <h4>Visualization Framework:</h4>
+                <ul>
+                  <li>Real-time parameter adjustment with immediate visualization updates</li>
+                  <li>Comparative analysis with base Weibull distribution</li>
+                  <li>Interactive plots for PDF, CDF, survival, and hazard functions</li>
+                  <li>Clean mathematical structure with interpretable parameter effects</li>
+                  <li>Mobile-responsive deployment via Streamlit Community Cloud</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="tech-stack-container">
+              <h4>Technology Stack:</h4>
+              <div class="tech-stack">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R">
+                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
+                <img src="https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white" alt="SciPy">
+                <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
+                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
+              </div>
+            </div>
+            
+            <div class="project-links">
+              <a href="https://github.com/trymoremhlanga2000-jpg/Sine-Type-II-Half-Logistic-Weibull-Distribution" target="_blank" class="btn btn-primary">
+                <i class="fas fa-code"></i> View Source Code
+              </a>
+              <a href="#" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Interactive Demo
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="tech-stack-container">
-          <h4>Technology Stack:</h4>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-            <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R">
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-            <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
-            <img src="https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white" alt="SciPy">
-            <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
-            <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
-          </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://github.com/trymoremhlanga2000-jpg/Sine-Type-II-Half-Logistic-Weibull-Distribution" target="_blank" class="btn btn-primary">
-            <i class="fas fa-code"></i> View Source Code
-          </a>
-          <a href="#" target="_blank" class="btn btn-secondary">
-            <i class="fas fa-external-link-alt"></i> Interactive Demo
-          </a>
-        </div>
+        </article>
       </div>
-    </article>
-  </div>
-</section>
-
-<style>
-  /* ===================== PROJECTS SECTION STYLING ===================== */
-  #projects {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .section-title {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 2.8rem;
-    font-weight: 700;
-    position: relative;
-  }
-  
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 2px;
-  }
-  
-  .section-subtitle {
-    text-align: center;
-    color: #6c757d;
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Project Card Styling */
-  .project-card {
-    background: white;
-    border-radius: 15px;
-    padding: 2.5rem;
-    margin-bottom: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-  
-  .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-  }
-  
-  .project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2.5rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid #f1f3f5;
-  }
-  
-  .project-info {
-    flex: 1;
-  }
-  
-  .project-title {
-    color: #2c3e50;
-    font-size: 1.8rem;
-    margin: 0 0 0.8rem 0;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-  
-  .project-domain {
-    color: #6c757d;
-    font-size: 1rem;
-    margin: 0;
-  }
-  
-  .project-domain strong {
-    color: #495057;
-  }
-  
-  .project-image {
-    flex: 0 0 320px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 3px solid #f1f3f5;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .project-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-  }
-  
-  .project-card:hover .project-image img {
-    transform: scale(1.05);
-  }
-  
-  .project-details {
-    margin-top: 1.5rem;
-  }
-  
-  .project-objective {
-    color: #495057;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 1.8rem;
-    padding: 1.2rem;
-    background: #f8f9fa;
-    border-left: 4px solid #667eea;
-    border-radius: 0 8px 8px 0;
-  }
-  
-  .project-objective strong {
-    color: #2c3e50;
-  }
-  
-  .project-description {
-    color: #495057;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-  
-  .technical-highlights,
-  .performance-metrics {
-    margin: 1.8rem 0;
-  }
-  
-  .technical-highlights h4,
-  .performance-metrics h4 {
-    color: #2c3e50;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-  
-  .technical-highlights ul,
-  .performance-metrics ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .technical-highlights li,
-  .performance-metrics li {
-    padding: 0.5rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-    color: #495057;
-    line-height: 1.5;
-  }
-  
-  .technical-highlights li::before,
-  .performance-metrics li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: #667eea;
-    font-weight: bold;
-  }
-  
-  .technical-highlights strong,
-  .performance-metrics strong {
-    color: #2c3e50;
-  }
-  
-  /* Technology Stack Styling */
-  .tech-stack-container {
-    margin: 2.5rem 0;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 1px solid #e9ecef;
-  }
-  
-  .tech-stack-container h4 {
-    color: #2c3e50;
-    font-size: 1.3rem;
-    margin-bottom: 1.2rem;
-    font-weight: 600;
-  }
-  
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .tech-stack img {
-    height: 32px;
-    transition: all 0.2s ease;
-    border-radius: 4px;
-  }
-  
-  .tech-stack img:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Project Links Styling */
-  .project-links {
-    display: flex;
-    gap: 1.2rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid #f1f3f5;
-  }
-  
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.9rem 1.8rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    gap: 0.6rem;
-  }
-  
-  .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-  }
-  
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-  }
-  
-  .btn-secondary {
-    background: white;
-    color: #495057;
-    border: 2px solid #dee2e6;
-  }
-  
-  .btn-secondary:hover {
-    background: #f8f9fa;
-    border-color: #adb5bd;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 992px) {
-    .project-header {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    
-    .project-image {
-      flex: 0 0 auto;
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    
-    .project-title {
-      font-size: 1.6rem;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .section-title {
-      font-size: 2.2rem;
-    }
-    
-    .project-card {
-      padding: 1.8rem;
-    }
-    
-    .project-title {
-      font-size: 1.5rem;
-    }
-    
-    .project-links {
-      flex-direction: column;
-    }
-    
-    .btn {
-      width: 100%;
-      justify-content: center;
-    }
-    
-    .tech-stack {
-      justify-content: center;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .section-title {
-      font-size: 1.8rem;
-    }
-    
-    .section-subtitle {
-      font-size: 1rem;
-    }
-    
-    .project-card {
-      padding: 1.5rem;
-    }
-    
-    .tech-stack img {
-      height: 28px;
-    }
-  }
-</style>
-
-<!-- Font Awesome Icons for Buttons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </section>
 
     <!-- ===================== EXPERIENCE ===================== -->
     <section id="experience">
-      <div class="container section-card">
-        <h2>Professional Experience</h2>
-        <h3>Loans Officer Intern @ Probfix Financial Services</h3>
-        <p><em>March 2023 – October 2023</em></p>
-        <ul>
-          <li>Cleaned and managed financial data for 100+ clients monthly, improving report accuracy by 10%</li>
-          <li>Supported over 50 loan assessments, accelerating disbursement timelines</li>
-          <li>Prepared weekly financial summaries for management decision-making</li>
-          <li>Maintained 100% data accuracy across Excel-based systems</li>
-        </ul>
+      <div class="container">
+        <div class="section-card">
+          <h2>Professional Experience</h2>
+          <h3>Loans Officer Intern @ Probfix Financial Services</h3>
+          <p><em>March 2023 – October 2023</em></p>
+          <ul>
+            <li>Cleaned and managed financial data for 100+ clients monthly, improving report accuracy by 10%</li>
+            <li>Supported over 50 loan assessments, accelerating disbursement timelines</li>
+            <li>Prepared weekly financial summaries for management decision-making</li>
+            <li>Maintained 100% data accuracy across Excel-based systems</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- ===================== EDUCATION ===================== -->
     <section id="education">
-      <div class="container section-card">
-        <h2>Education</h2>
-        <h3>BSc Honours in Applied Statistics : First Class Division</h3>
-        <p>Midlands State University, Zimbabwe</p>
-        <p><em>September 2021 – June 2025</em></p>
-        <ul>
-          <li>Graduated with First Class Honours</li>
-          <li>Research Project: Credit Risk Prediction using Neural Networks and Reject Inference</li>
-          <li>Tools: Python, R, STATA</li>
-        </ul>
+      <div class="container">
+        <div class="section-card">
+          <h2>Education</h2>
+          <h3>BSc Honours in Applied Statistics : First Class Division</h3>
+          <p>Midlands State University, Zimbabwe</p>
+          <p><em>September 2021 – June 2025</em></p>
+          <ul>
+            <li>Graduated with First Class Honours</li>
+            <li>Research Project: Credit Risk Prediction using Neural Networks and Reject Inference</li>
+            <li>Tools: Python, R, STATA</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- ===================== CONTACT ===================== -->
     <section id="contact">
-      <div class="container section-card">
-        <h2>Engage</h2>
-        <p>
-          If you are seeking a technically rigorous, analytically grounded and deployment-ready
-          data professional, I welcome collaboration.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:trymoremhlanga5021@gmail.com">Email</a>
-          <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank">LinkedIn</a>
-          <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank">GitHub</a>
+      <div class="container">
+        <div class="section-card">
+          <h2>Get In Touch</h2>
+          <p>
+            If you are seeking a technically rigorous, analytically grounded and deployment-ready
+            data professional, I welcome collaboration on innovative projects and data challenges.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:trymoremhlanga5021@gmail.com">
+              <i class="fas fa-envelope"></i> Email
+            </a>
+            <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+          <p class="footer-note">
+            &copy; <span id="year"></span> Trymore Mhlanga. All rights reserved.
+          </p>
         </div>
-        <p class="footer-note">
-          &copy; <span id="year"></span> Trymore Mhlanga. All rights reserved.
-        </p>
       </div>
     </section>
 
   </div> <!-- End of main-content -->
 
-  <script src="assets/js/main.js"></script>
   <script>
+    // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Add active class to navigation links based on scroll position
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPos = window.scrollY + 100;
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if(scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          document.querySelectorAll('.sidebar-nav a, .nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+
+    // Simple typing effect for hero subtitle
+    const typingText = document.getElementById('typing-text');
+    if(typingText) {
+      const texts = ['Applied Statistician', 'Data Scientist', 'Machine Learning Engineer', 'AI Researcher'];
+      let textIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      
+      function type() {
+        const currentText = texts[textIndex];
+        
+        if(isDeleting) {
+          typingText.textContent = currentText.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typingText.textContent = currentText.substring(0, charIndex + 1);
+          charIndex++;
+        }
+        
+        if(!isDeleting && charIndex === currentText.length) {
+          isDeleting = true;
+          setTimeout(type, 1500);
+        } else if(isDeleting && charIndex === 0) {
+          isDeleting = false;
+          textIndex = (textIndex + 1) % texts.length;
+          setTimeout(type, 500);
+        } else {
+          setTimeout(type, isDeleting ? 50 : 100);
+        }
+      }
+      
+      // Start typing effect after page load
+      setTimeout(type, 1000);
+    }
   </script>
 
 </body>
