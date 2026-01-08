@@ -1,15 +1,16 @@
 // ===============================
 // PREMIUM PORTFOLIO UX ENGINE
-// Phase 3 – Professional JavaScript
 // ===============================
 
+// ===============================
 // Smooth Scroll Navigation
+// ===============================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
+    const target = document.querySelector(this.getAttribute("href"));
+    if (!target) return;
     e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
-    });
+    target.scrollIntoView({ behavior: "smooth" });
   });
 });
 
@@ -36,10 +37,11 @@ function typeLoop() {
   if (!typingElement) return;
 
   const current = titles[titleIndex];
+
   if (!isDeleting) {
     typingElement.textContent = current.slice(0, charIndex++);
     if (charIndex > current.length) {
-      setTimeout(() => isDeleting = true, pauseTime);
+      setTimeout(() => (isDeleting = true), pauseTime);
     }
   } else {
     typingElement.textContent = current.slice(0, charIndex--);
@@ -57,7 +59,9 @@ typeLoop();
 // ===============================
 // Scroll Reveal Animations
 // ===============================
-const revealElements = document.querySelectorAll("section, .project-case, .skill-badge");
+const revealElements = document.querySelectorAll(
+  "section, .project-case, .section-card"
+);
 
 const revealObserver = new IntersectionObserver(
   entries => {
@@ -84,7 +88,9 @@ document.body.appendChild(progressBar);
 
 window.addEventListener("scroll", () => {
   const scrollTop = document.documentElement.scrollTop;
-  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrollHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
   const progress = (scrollTop / scrollHeight) * 100;
   progressBar.style.width = progress + "%";
 });
@@ -134,14 +140,14 @@ window.addEventListener("load", () => {
 });
 
 // ===============================
-// Minimal CSS Injection for Animations
+// Minimal CSS Injection (JS-driven effects)
 // ===============================
 const style = document.createElement("style");
 style.innerHTML = `
   .reveal-hidden {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
+    transform: translateY(35px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
   }
 
   .reveal-active {
@@ -160,7 +166,7 @@ style.innerHTML = `
   }
 
   .navbar-scrolled {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
   }
 `;
 document.head.appendChild(style);
