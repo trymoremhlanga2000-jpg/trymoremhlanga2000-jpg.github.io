@@ -392,3 +392,71 @@ section p {
     padding: 2rem;
   }
 }
+
+
+/* ===============================
+   SIDEBAR NAVIGATION
+   =============================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  background: linear-gradient(180deg, #080b10, #0b0d10);
+  border-right: 1px solid var(--border-soft);
+  padding: 2rem 1.5rem;
+  z-index: 1000;
+}
+
+.sidebar-brand {
+  margin-bottom: 3rem;
+}
+
+.sidebar-brand h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.sidebar-brand span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sidebar-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+  color: var(--accent);
+  transform: translateX(6px);
+}
+
+/* ===============================
+   MAIN CONTENT OFFSET
+   =============================== */
+.main-content {
+  margin-left: 240px;
+}
+
+/* ===============================
+   MOBILE BEHAVIOR
+   =============================== */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
