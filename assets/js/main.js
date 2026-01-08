@@ -1,172 +1,76 @@
-// ===============================
-// PREMIUM PORTFOLIO UX ENGINE
-// ===============================
-
-// ===============================
-// Smooth Scroll Navigation
-// ===============================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
-    const target = document.querySelector(this.getAttribute("href"));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: "smooth" });
-  });
-});
-
-// ===============================
-// Typing Effect (Hero Title)
-// ===============================
-const titles = [
+// ===================== Typing Effect =====================
+const typingText = document.getElementById("typing-text");
+const phrases = [
   "Data Scientist",
-  "Machine Learning Engineer",
   "Applied Statistician",
-  "AI Product Builder"
+  "Machine Learning Engineer",
+  "Predictive Modeler",
+  "Risk Analytics Specialist"
 ];
 
-let titleIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typingSpeed = 80;
-const deletingSpeed = 40;
-const pauseTime = 1200;
+let phraseIndex = 0;
+let letterIndex = 0;
+let typingSpeed = 100; // ms per letter
+let erasingSpeed = 50; 
+let delayBetweenPhrases = 2000;
 
-const typingElement = document.getElementById("typing-text");
-
-function typeLoop() {
-  if (!typingElement) return;
-
-  const current = titles[titleIndex];
-
-  if (!isDeleting) {
-    typingElement.textContent = current.slice(0, charIndex++);
-    if (charIndex > current.length) {
-      setTimeout(() => (isDeleting = true), pauseTime);
-    }
+function type() {
+  if (letterIndex < phrases[phraseIndex].length) {
+    typingText.textContent += phrases[phraseIndex].charAt(letterIndex);
+    letterIndex++;
+    setTimeout(type, typingSpeed);
   } else {
-    typingElement.textContent = current.slice(0, charIndex--);
-    if (charIndex < 0) {
-      isDeleting = false;
-      titleIndex = (titleIndex + 1) % titles.length;
-    }
+    setTimeout(erase, delayBetweenPhrases);
   }
-
-  setTimeout(typeLoop, isDeleting ? deletingSpeed : typingSpeed);
 }
 
-typeLoop();
-
-// ===============================
-// Scroll Reveal Animations
-// ===============================
-const revealElements = document.querySelectorAll(
-  "section, .project-case, .section-card"
-);
-
-const revealObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("reveal-active");
-      }
-    });
-  },
-  { threshold: 0.12 }
-);
-
-revealElements.forEach(el => {
-  el.classList.add("reveal-hidden");
-  revealObserver.observe(el);
-});
-
-// ===============================
-// Scroll Progress Bar
-// ===============================
-const progressBar = document.createElement("div");
-progressBar.id = "scroll-progress";
-document.body.appendChild(progressBar);
-
-window.addEventListener("scroll", () => {
-  const scrollTop = document.documentElement.scrollTop;
-  const scrollHeight =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
-  const progress = (scrollTop / scrollHeight) * 100;
-  progressBar.style.width = progress + "%";
-});
-
-// ===============================
-// Sticky Navbar Shadow
-// ===============================
-const navbar = document.querySelector(".navbar");
-
-window.addEventListener("scroll", () => {
-  if (!navbar) return;
-  if (window.scrollY > 20) {
-    navbar.classList.add("navbar-scrolled");
+function erase() {
+  if (letterIndex > 0) {
+    typingText.textContent = phrases[phraseIndex].substring(0, letterIndex - 1);
+    letterIndex--;
+    setTimeout(erase, erasingSpeed);
   } else {
-    navbar.classList.remove("navbar-scrolled");
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    setTimeout(type, typingSpeed);
   }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (phrases.length) setTimeout(type, 500);
 });
 
-// ===============================
-// Project Hover Micro-Interactions
-// ===============================
-const projectCards = document.querySelectorAll(".project-case");
-
-projectCards.forEach(card => {
-  card.addEventListener("mousemove", e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
+// ===================== Smooth Scrolling =====================
+const navLinks = document.querySelectorAll("a[href^='#']");
+navLinks.forEach(link => {
+  link.addEventListener("click", function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop - 70, // adjust for fixed navbar height
+        behavior: "smooth"
+      });
+    }
   });
 });
 
-// ===============================
-// Dynamic Year Footer
-// ===============================
-const yearElement = document.getElementById("year");
-if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
-}
+// ===================== Fade-In Sections on Scroll =====================
+const sections = document.querySelectorAll("section");
+const observerOptions = {
+  root: null,
+  rootMargin: "0px",
+  threshold: 0.1
+};
 
-// ===============================
-// Performance Optimizations
-// ===============================
-window.addEventListener("load", () => {
-  document.body.classList.add("loaded");
+const sectionObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("fade-in");
+      observer.unobserve(entry.target); // animate only once
+    }
+  });
+}, observerOptions);
+
+sections.forEach(section => {
+  sectionObserver.observe(section);
 });
-
-// ===============================
-// Minimal CSS Injection (JS-driven effects)
-// ===============================
-const style = document.createElement("style");
-style.innerHTML = `
-  .reveal-hidden {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-
-  .reveal-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  #scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background: linear-gradient(to right, #00d4ff, #6ae3ff);
-    z-index: 9999;
-  }
-
-  .navbar-scrolled {
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-  }
-`;
-document.head.appendChild(style);
