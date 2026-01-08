@@ -1,1448 +1,1507 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <title>Trymore Mhlanga | Data Scientist & Applied Statistician</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Trymore Mhlanga – First Class Honours Applied Statistician, Data Scientist and Machine Learning Engineer. Specialized in predictive modeling, risk analytics, and production-ready ML systems.">
-  
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  
-  <style>
-    /* ===================== GLOBAL STYLES ===================== */
-    :root {
-      --primary: #2d3748;
-      --secondary: #4a5568;
-      --accent: #667eea;
-      --accent-dark: #5a67d8;
-      --light: #f7fafc;
-      --light-gray: #e2e8f0;
-      --dark: #1a202c;
-      --success: #48bb78;
-      --border-radius: 12px;
-      --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      --transition: all 0.3s ease;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: var(--secondary);
-      background-color: #f9fafb;
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    section {
-      padding: 80px 0;
-    }
-
-    h1, h2, h3, h4 {
-      color: var(--primary);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      display: inline-block;
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-      border-radius: 2px;
-    }
-
-    p {
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-    }
-
-    ul {
-      padding-left: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: var(--transition);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: white;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      gap: 8px;
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
-
-    .btn-outline:hover {
-      background: var(--accent);
-      color: white;
-    }
-
-    .section-card {
-      background: white;
-      border-radius: var(--border-radius);
-      padding: 3rem;
-      box-shadow: var(--box-shadow);
-      border: 1px solid var(--light-gray);
-    }
-
-    /* ===================== SIDEBAR NAV ===================== */
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      height: 100vh;
-      width: 260px;
-      background: white;
-      border-right: 1px solid var(--light-gray);
-      padding: 2rem 1.5rem;
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .sidebar-brand h3 {
-      font-size: 1.5rem;
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-    }
-
-    .sidebar-brand span {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .sidebar-nav {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .sidebar-nav a {
-      padding: 12px 16px;
-      border-radius: 8px;
-      color: var(--secondary);
-      font-weight: 500;
-      transition: var(--transition);
-    }
-
-    .sidebar-nav a:hover {
-      background: var(--light);
-      color: var(--accent);
-    }
-
-    /* ===================== MAIN CONTENT ===================== */
-    .main-content {
-      margin-left: 260px;
-      min-height: 100vh;
-    }
-
-    /* ===================== NAVBAR ===================== */
-    .navbar {
-      display: none;
-      background: white;
-      padding: 1.2rem 0;
-      border-bottom: 1px solid var(--light-gray);
-      position: sticky;
-      top: 0;
-      z-index: 90;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .navbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--secondary);
-      font-weight: 500;
-      padding: 8px 0;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* ===================== HERO ===================== */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      padding: 0;
-    }
-
-    .hero-content {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .profile-photo {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid white;
-      box-shadow: var(--box-shadow);
-      margin-bottom: 2rem;
-    }
-
-    .hero-content h1 {
-      font-size: 3.5rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-content h2 {
-      font-size: 1.8rem;
-      color: var(--secondary);
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: var(--secondary);
-      max-width: 700px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ===================== SKILLS ===================== */
-    #skills .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 1.5rem 0 2.5rem;
-    }
-
-    #skills h3 {
-      font-size: 1.4rem;
-      margin: 2.5rem 0 1rem;
-      color: var(--primary);
-    }
-
-    #skills h3:first-child {
-      margin-top: 0;
-    }
-
-    /* ===================== PROJECTS ===================== */
-    #projects {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    }
-
-    .section-title {
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 2.8rem;
-      font-weight: 800;
-      position: relative;
-      display: block;
-      width: 100%;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 5px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-      border-radius: 3px;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      color: var(--secondary);
-      font-size: 1.2rem;
-      margin: 2rem auto 4rem;
-      max-width: 800px;
-      line-height: 1.6;
-    }
-
-    .project-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--light-gray);
-      transition: var(--transition);
-      overflow: hidden;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 3rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 2px solid var(--light-gray);
-    }
-
-    .project-info {
-      flex: 1;
-    }
-
-    .project-title {
-      color: var(--primary);
-      font-size: 1.9rem;
-      margin: 0 0 1rem 0;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    .project-domain {
-      color: var(--secondary);
-      font-size: 1.1rem;
-      margin: 0;
-    }
-
-    .project-domain strong {
-      color: var(--primary);
-    }
-
-    .project-image {
-      flex: 0 0 340px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 3px solid white;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .project-image img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-image img {
-      transform: scale(1.05);
-    }
-
-    .project-details {
-      margin-top: 1.5rem;
-    }
-
-    .project-objective {
-      color: var(--primary);
-      font-size: 1.15rem;
-      line-height: 1.7;
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      background: linear-gradient(135deg, #f8f9fa 0%, #edf2f7 100%);
-      border-left: 5px solid var(--accent);
-      border-radius: 0 10px 10px 0;
-      font-weight: 500;
-    }
-
-    .project-objective strong {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .project-description {
-      color: var(--secondary);
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-      font-size: 1.1rem;
-    }
-
-    .technical-highlights,
-    .performance-metrics {
-      margin: 2rem 0;
-    }
-
-    .technical-highlights h4,
-    .performance-metrics h4 {
-      color: var(--primary);
-      font-size: 1.35rem;
-      margin-bottom: 1.2rem;
-      font-weight: 700;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--light-gray);
-      display: inline-block;
-    }
-
-    .technical-highlights ul,
-    .performance-metrics ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .technical-highlights li,
-    .performance-metrics li {
-      padding: 0.8rem 0;
-      padding-left: 2rem;
-      position: relative;
-      color: var(--secondary);
-      line-height: 1.6;
-      font-size: 1.05rem;
-    }
-
-    .technical-highlights li::before,
-    .performance-metrics li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    .technical-highlights strong,
-    .performance-metrics strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .tech-stack-container {
-      margin: 3rem 0;
-      padding: 2rem;
-      background: var(--light);
-      border-radius: 12px;
-      border: 1px solid var(--light-gray);
-    }
-
-    .tech-stack-container h4 {
-      color: var(--primary);
-      font-size: 1.35rem;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
-
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      align-items: center;
-    }
-
-    .tech-stack img {
-      height: 35px;
-      transition: var(--transition);
-      border-radius: 6px;
-    }
-
-    .tech-stack img:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 2px solid var(--light-gray);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: white;
-      border: none;
-      padding: 14px 30px;
-      font-size: 1.05rem;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--light-gray);
-      padding: 14px 30px;
-      font-size: 1.05rem;
-    }
-
-    .btn-secondary:hover {
-      background: var(--light);
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    /* ===================== EXPERIENCE & EDUCATION ===================== */
-    #experience h3,
-    #education h3 {
-      font-size: 1.6rem;
-      margin: 1.5rem 0 0.5rem;
-      color: var(--primary);
-    }
-
-    #experience p em,
-    #education p em {
-      color: var(--secondary);
-      font-style: italic;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    /* ===================== CONTACT ===================== */
-    .contact-links {
-      display: flex;
-      gap: 2rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-
-    .contact-links a {
-      padding: 12px 28px;
-      background: var(--light);
-      border-radius: 8px;
-      font-weight: 600;
-      color: var(--accent);
-      border: 2px solid var(--light-gray);
-      transition: var(--transition);
-    }
-
-    .contact-links a:hover {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    .footer-note {
-      text-align: center;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--light-gray);
-      color: var(--secondary);
-      font-size: 0.95rem;
-    }
-
-    /* ===================== RESPONSIVE DESIGN ===================== */
-    @media (max-width: 1200px) {
-      .main-content {
-        margin-left: 0;
-      }
-      
-      .sidebar {
-        display: none;
-      }
-      
-      .navbar {
-        display: block;
-      }
-    }
-
-    @media (max-width: 992px) {
-      .project-header {
-        flex-direction: column;
-        gap: 2rem;
-      }
-      
-      .project-image {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      
-      .project-title {
-        font-size: 1.7rem;
-      }
-      
-      h2 {
-        font-size: 2.2rem;
-      }
-      
-      .section-title {
-        font-size: 2.4rem;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.8rem;
-      }
-      
-      .hero-content h2 {
-        font-size: 1.5rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .project-card {
-        padding: 2rem;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-      }
-      
-      .section-subtitle {
-        font-size: 1.1rem;
-        margin: 1.5rem auto 3rem;
-      }
-      
-      .project-links {
-        flex-direction: column;
-      }
-      
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-      
-      .hero-content h1 {
-        font-size: 2.3rem;
-      }
-      
-      .hero-content h2 {
-        font-size: 1.3rem;
-      }
-      
-      .hero-content p {
-        font-size: 1.1rem;
-      }
-      
-      section {
-        padding: 60px 0;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .section-title {
-        font-size: 1.8rem;
-      }
-      
-      .project-card {
-        padding: 1.5rem;
-      }
-      
-      .project-title {
-        font-size: 1.5rem;
-      }
-      
-      .tech-stack img {
-        height: 30px;
-      }
-      
-      .section-card {
-        padding: 2rem;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .hero-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
-
-    /* ===================== ANIMATIONS ===================== */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .project-card {
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .project-card:nth-child(2) { animation-delay: 0.1s; }
-    .project-card:nth-child(3) { animation-delay: 0.2s; }
-    .project-card:nth-child(4) { animation-delay: 0.3s; }
-    .project-card:nth-child(5) { animation-delay: 0.4s; }
-    .project-card:nth-child(6) { animation-delay: 0.5s; }
-  </style>
-</head>
-
-<body>
-
-  <!-- ===================== SIDEBAR NAV ===================== -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <h3>Trymore Mhlanga</h3>
-      <span>Applied Statistician & Data Scientist</span>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a href="#hero">Home</a>
-      <a href="#about">Profile</a>
-      <a href="#skills">Tech Stack</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </aside>
-
-  <!-- ===================== MAIN CONTENT ===================== -->
-  <div class="main-content">
-
-    <!-- ===================== NAVBAR ===================== -->
-    <nav class="navbar">
-      <div class="container">
-        <div class="logo">Trymore Mhlanga</div>
-        <ul class="nav-links">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">Profile</a></li>
-          <li><a href="#skills">Capabilities</a></li>
-          <li><a href="#projects">Case Studies</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- ===================== HERO ===================== -->
-    <section id="hero">
-      <div class="container">
-        <div class="hero-content">
-          <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-photo" />
-
-          <h1>Trymore Mhlanga</h1>
-          <h2>Applied Statistician & Data Scientist</h2>
-
-          <p>
-            First-Class Honours Applied Statistician specializing in predictive modeling, 
-            machine learning, and data-driven decision systems. I transform complex datasets 
-            into actionable insights and production-ready analytical solutions across finance, 
-            media, and customer intelligence domains.
-          </p>
-
-          <div class="hero-buttons">
-            <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="btn">
-              <i class="fab fa-github"></i> View GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="btn btn-outline">
-              <i class="fab fa-linkedin"></i> LinkedIn Profile
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PROFILE ===================== -->
-    <section id="about">
-      <div class="container">
-        <div class="section-card">
-          <h2>Professional Profile</h2>
-          <p>
-            I am a Statistician with a strong foundation in probability theory, predictive modeling,
-            statistical inference and analytical problem-solving. My expertise spans the complete data
-            science lifecycle, from data collection, engineering and transformation to modeling,
-            evaluation, deployment and monitoring.
-          </p>
-          <p>
-            I specialize in supervised learning, forecasting, hypothesis testing and experimental design,
-            with a strong emphasis on interpretability, robustness and business relevance.
-            I am proficient in translating complex datasets into clear reports, dashboards and
-            executive-level recommendations that support data-driven decision-making.
-          </p>
-          <p>
-            My professional and academic work includes credit risk modeling, customer churn analysis,
-            media analytics and statistical research. I am particularly interested in building scalable
-            ML systems that balance theoretical rigor with real-world impact.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== SKILLS ===================== -->
-    <section id="skills">
-      <div class="container">
-        <div class="section-card">
-          <h2>Technical Capabilities</h2>
-
-          <h3>Programming & Querying</h3>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-            <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" />
-            <img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
-            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-          </div>
-
-          <h3>Machine Learning & Statistical Modeling</h3>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
-            <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" />
-            <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" />
-            <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" />
-            <img src="https://img.shields.io/badge/Statsmodels-5A5A5A?style=for-the-badge" />
-            <img src="https://img.shields.io/badge/XGBoost-017CEE?style=for-the-badge&logo=xgboost&logoColor=white" />
-          </div>
-
-          <h3>Data Engineering & Visualization</h3>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
-            <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" />
-            <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" />
-            <img src="https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge&logo=matplotlib&logoColor=white" />
-            <img src="https://img.shields.io/badge/Seaborn-2E6F95?style=for-the-badge" />
-            <img src="https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white" />
-          </div>
-
-          <h3>BI, Cloud & Deployment</h3>
-          <div class="tech-stack">
-            <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" />
-            <img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white" />
-            <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
-            <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-            <img src="https://img.shields.io/badge/GCP-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" />
-            <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PROJECTS ===================== -->
-    <section id="projects">
-      <div class="container">
-        <h2 class="section-title">Technical Projects & Case Studies</h2>
-        <p class="section-subtitle">End-to-end machine learning applications deployed with interactive interfaces</p>
-
-        <!-- Project 1: Credit Risk Assessment System -->
-        <article class="project-card">
-          <div class="project-header">
-            <div class="project-info">
-              <h3 class="project-title">Credit Risk Assessment System</h3>
-              <p class="project-domain"><strong>Domain:</strong> Financial Technology • Risk Management • Machine Learning</p>
-            </div>
-            <div class="project-image">
-              <img src="assets/credit-risk.PNG" alt="Credit Risk Dashboard Interface" loading="lazy">
-            </div>
-          </div>
-          
-          <div class="project-details">
-            <p class="project-objective"><strong>Objective:</strong> Develop a comprehensive credit scoring system that predicts customer default probability using multiple machine learning models with an interactive web interface for financial decision-makers.</p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trymore Mhlanga | Applied Statistician & Data Scientist</title>
+    <meta name="description" content="First-Class Honours Applied Statistician specializing in machine learning, predictive modeling, and data-driven decision systems with production deployment expertise.">
+    
+    <!-- Favicon & Social Meta -->
+    <link rel="icon" type="image/x-icon" href="#">
+    <meta property="og:title" content="Trymore Mhlanga | Data Science Portfolio">
+    <meta property="og:description" content="Professional Data Scientist & Applied Statistician">
+    <meta property="og:image" content="#">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===================== DARK THEME VARIABLES ===================== */
+        :root {
+            /* Color Palette */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #121218;
+            --bg-card: #1a1a24;
+            --bg-hover: #232332;
             
-            <div class="project-description">
-              <p>This end-to-end credit risk system processes financial data through a complete ML pipeline from preprocessing to deployment. The application enables financial institutions to assess borrower risk in real-time with interpretable results.</p>
-              
-              <div class="technical-highlights">
-                <h4>Technical Implementation:</h4>
-                <ul>
-                  <li><strong>Data Pipeline:</strong> Automated preprocessing handling missing values, outliers, and feature engineering with Pandas workflows</li>
-                  <li><strong>Model Ensemble:</strong> Comparative analysis of 14+ machine learning models including Logistic Regression, Random Forest, and Gradient Boosting</li>
-                  <li><strong>Feature Engineering:</strong> Created financial ratios, payment history metrics, and behavioral scoring features</li>
-                  <li><strong>Model Optimization:</strong> Hyperparameter tuning with cross-validation to optimize for precision and recall balance</li>
-                  <li><strong>Serialization:</strong> Complete pipeline persistence using pickle for reproducible predictions</li>
-                  <li><strong>Interactive Interface:</strong> Streamlit application with real-time prediction capabilities and risk visualization</li>
-                </ul>
-              </div>
-              
-              <div class="performance-metrics">
-                <h4>Performance & Results:</h4>
-                <ul>
-                  <li>Model accuracy: Up to 92% on validation datasets</li>
-                  <li>ROC-AUC score: 0.94 for best-performing ensemble model</li>
-                  <li>Feature importance analysis for explainable AI decisions</li>
-                  <li>Real-time prediction latency under 2 seconds</li>
-                </ul>
-              </div>
-            </div>
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
             
-            <div class="tech-stack-container">
-              <h4>Technology Stack:</h4>
-              <div class="tech-stack">
-                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-                <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
-                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
-                <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
-              </div>
-            </div>
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --accent-hover: #7c3aed;
             
-            <div class="project-links">
-              <a href="https://github.com/trymoremhlanga2000-jpg/Credit-risk" target="_blank" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Source Code
-              </a>
-              <a href="#" target="_blank" class="btn btn-secondary">
-                <i class="fas fa-external-link-alt"></i> Live Deployment
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: Customer Churn Prediction System -->
-        <article class="project-card">
-          <div class="project-header">
-            <div class="project-info">
-              <h3 class="project-title">Customer Churn Prediction System</h3>
-              <p class="project-domain"><strong>Domain:</strong> Customer Intelligence • Retention Analytics • Business Intelligence</p>
-            </div>
-            <div class="project-image">
-              <img src="assets/customer-churn.PNG" alt="Customer Churn Prediction Dashboard" loading="lazy">
-            </div>
-          </div>
-          
-          <div class="project-details">
-            <p class="project-objective"><strong>Objective:</strong> Build a machine learning system to identify at-risk customers in subscription-based services, enabling proactive retention strategies with interpretable predictions.</p>
+            --border-color: #2d3748;
+            --border-light: #4a5568;
             
-            <div class="project-description">
-              <p>This system provides telecom companies with actionable insights to reduce customer attrition. The modular pipeline handles class imbalance and provides business stakeholders with an intuitive interface.</p>
-              
-              <div class="technical-highlights">
-                <h4>Technical Implementation:</h4>
-                <ul>
-                  <li><strong>Data Processing:</strong> Automated Kaggle API integration for dataset access with comprehensive cleaning pipeline</li>
-                  <li><strong>Class Imbalance Handling:</strong> Implemented SMOTE (Synthetic Minority Over-sampling Technique) to address skewed churn distribution</li>
-                  <li><strong>Model Comparison:</strong> Systematic evaluation of Logistic Regression vs. Random Forest with comprehensive metrics</li>
-                  <li><strong>Feature Encoding:</strong> OneHotEncoding for categorical variables and StandardScaler for numerical features</li>
-                  <li><strong>Model Interpretation:</strong> Coefficient analysis for Logistic Regression and feature importance for Random Forest</li>
-                  <li><strong>Production Pipeline:</strong> Complete serialization of models and preprocessing steps using pickle</li>
-                </ul>
-              </div>
-              
-              <div class="performance-metrics">
-                <h4>Performance & Results:</h4>
-                <ul>
-                  <li>ROC-AUC: 0.91 for Random Forest model</li>
-                  <li>Recall optimization to identify maximum actual churners</li>
-                  <li>Comprehensive evaluation with precision, recall, F1-score, and confusion matrices</li>
-                  <li>Streamlit deployment with user-friendly input forms and real-time predictions</li>
-                </ul>
-              </div>
-            </div>
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
             
-            <div class="tech-stack-container">
-              <h4>Technology Stack:</h4>
-              <div class="tech-stack">
-                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-                <img src="https://img.shields.io/badge/imbalanced--learn-FF6F61?style=for-the-badge" alt="Imbalanced-learn">
-                <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
-              </div>
-            </div>
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
             
-            <div class="project-links">
-              <a href="https://github.com/trymoremhlanga2000-jpg/Customer-Churn" target="_blank" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Source Code
-              </a>
-              <a href="https://customer-churn-bytrymore.streamlit.app/" target="_blank" class="btn btn-secondary">
-                <i class="fas fa-external-link-alt"></i> Live Deployment
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3: Netflix Interactive Analytics Dashboard -->
-        <article class="project-card">
-          <div class="project-header">
-            <div class="project-info">
-              <h3 class="project-title">Netflix Interactive Analytics Dashboard</h3>
-              <p class="project-domain"><strong>Domain:</strong> Media Analytics • Business Intelligence • Data Visualization</p>
-            </div>
-            <div class="project-image">
-              <img src="assets/netflix-dashboard.PNG" alt="Netflix Analytics Dashboard" loading="lazy">
-            </div>
-          </div>
-          
-          <div class="project-details">
-            <p class="project-objective"><strong>Objective:</strong> Transform Netflix's content library into actionable insights through an interactive dashboard that analyzes content trends, genre preferences, and global production patterns.</p>
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
             
-            <div class="project-description">
-              <p>This comprehensive analytics platform enables stakeholders to explore Netflix's 8,800+ title catalog through six interactive modules with real-time filtering and multi-dimensional analysis capabilities.</p>
-              
-              <div class="technical-highlights">
-                <h4>Dashboard Modules:</h4>
-                <ul>
-                  <li><strong>Content Type Analysis:</strong> Donut charts with click-to-filter functionality for Movies vs TV Shows</li>
-                  <li><strong>Temporal Analysis:</strong> Line charts tracking monthly, yearly, and decade-wise release patterns</li>
-                  <li><strong>Genre Intelligence:</strong> Top genre identification with popularity metrics and engagement indicators</li>
-                  <li><strong>Retention Analysis:</strong> Average duration by genre with comparative analysis across categories</li>
-                  <li><strong>Duration Distribution:</strong> Histogram visualizations with statistical insights (mean, median)</li>
-                  <li><strong>Geospatial Analysis:</strong> Interactive choropleth maps showing country-wise content production</li>
-                </ul>
-              </div>
-              
-              <div class="performance-metrics">
-                <h4>Key Features:</h4>
-                <ul>
-                  <li>Real-time filtering by content type, genre, country, and release year</li>
-                  <li>Interactive visualizations with hover effects, zoom, and responsive design</li>
-                  <li>Professional UI/UX with clean layout and intuitive navigation</li>
-                  <li>Optimized for both desktop and mobile viewing experiences</li>
-                </ul>
-              </div>
-            </div>
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s ease;
             
-            <div class="tech-stack-container">
-              <h4>Technology Stack:</h4>
-              <div class="tech-stack">
-                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
-                <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
-                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
-                <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
-              </div>
-            </div>
-            
-            <div class="project-links">
-              <a href="https://github.com/trymoremhlanga2000-jpg/Netflix-Interactive-Dashboard" target="_blank" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Source Code
-              </a>
-              <a href="#" target="_blank" class="btn btn-secondary">
-                <i class="fas fa-external-link-alt"></i> Live Dashboard
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 4: Exam Score AI Predictor -->
-        <article class="project-card">
-          <div class="project-header">
-            <div class="project-info">
-              <h3 class="project-title">Exam Score AI Predictor</h3>
-              <p class="project-domain"><strong>Domain:</strong> Educational Technology • Deep Learning • Predictive Analytics</p>
-            </div>
-            <div class="project-image">
-              <img src="assets/exam-score.PNG" alt="Exam Score Prediction Dashboard" loading="lazy">
-            </div>
-          </div>
-          
-          <div class="project-details">
-            <p class="project-objective"><strong>Objective:</strong> Develop a deep learning application that predicts student exam scores based on academic behavior, study habits, and environmental factors with real-time predictions and improvement recommendations.</p>
-            
-            <div class="project-description">
-              <p>This TensorFlow-based neural network model processes 20,000+ student records to provide accurate score predictions (0-100) and personalized insights for educational stakeholders.</p>
-              
-              <div class="technical-highlights">
-                <h4>Technical Implementation:</h4>
-                <ul>
-                  <li><strong>Deep Learning Architecture:</strong> Custom neural network built with TensorFlow/Keras for regression task</li>
-                  <li><strong>Feature Engineering:</strong> 12+ input features including study hours, attendance, sleep quality, and exam difficulty</li>
-                  <li><strong>Preprocessing Pipeline:</strong> LabelEncoder for categorical variables and Scikit-learn scaler for numerical features</li>
-                  <li><strong>Model Optimization:</strong> Hyperparameter tuning for optimal architecture and training parameters</li>
-                  <li><strong>Visualization System:</strong> Interactive Plotly gauge charts for intuitive score representation</li>
-                  <li><strong>Performance Caching:</strong> Optimized model and scaler loading with caching for fast inference</li>
-                </ul>
-              </div>
-              
-              <div class="performance-metrics">
-                <h4>Application Features:</h4>
-                <ul>
-                  <li>Real-time predictions with sub-second response time</li>
-                  <li>Interactive gauge visualization showing predicted scores</li>
-                  <li>Smart recommendations based on input patterns and predicted performance</li>
-                  <li>Professional dashboard with custom CSS styling and responsive layout</li>
-                  <li>Cached model loading for optimized application performance</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div class="tech-stack-container">
-              <h4>Technology Stack:</h4>
-              <div class="tech-stack">
-                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow">
-                <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white" alt="Keras">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
-                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-                <img src="https://img.shields.io/badge/Joblib-00A3E0?style=for-the-badge" alt="Joblib">
-              </div>
-            </div>
-            
-            <div class="project-links">
-              <a href="https://github.com/trymoremhlanga2000-jpg/Exam-Score-Prediction" target="_blank" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Source Code
-              </a>
-              <a href="#" target="_blank" class="btn btn-secondary">
-                <i class="fas fa-external-link-alt"></i> Live Application
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 5: Loan Default Prediction System -->
-        <article class="project-card">
-          <div class="project-header">
-            <div class="project-info">
-              <h3 class="project-title">Loan Default Prediction System</h3>
-              <p class="project-domain"><strong>Domain:</strong> Banking Technology • Credit Scoring • Risk Assessment</p>
-            </div>
-            <div class="project-image">
-              <img src="assets/loan-approval.PNG" alt="Loan Default Prediction Interface" loading="lazy">
-            </div>
-          </div>
-          
-          <div class="project-details">
-            <p class="project-objective"><strong>Objective:</strong> Analyze key factors influencing bank loan approval decisions and build a multi-model prediction system to assess loan default likelihood with an interactive GUI.</p>
-            
-            <div class="project-description">
-              <p>This comprehensive analysis compares six machine learning algorithms to identify the most effective model for predicting loan approval outcomes based on applicant financial profiles.</p>
-              
-              <div class="technical-highlights">
-                <h4>Model Comparison Framework:</h4>
-                <ul>
-                  <li><strong>Algorithm Diversity:</strong> Implemented Logistic Regression, Decision Trees, Random Forest, K-Nearest Neighbors, XGBoost, and SMOTE for class balancing</li>
-                  <li><strong>Feature Analysis:</strong> Identified key approval factors including income, credit history, employment status, and loan amount</li>
-                  <li><strong>Model Evaluation:</strong> Comprehensive metrics comparison including accuracy, precision, recall, and F1-score</li>
-                  <li><strong>Interactive GUI:</strong> Streamlit application enabling users to input applicant data and view model predictions</li>
-                  <li><strong>Model Serialization:</strong> Multiple pickle files for different trained models allowing A/B testing</li>
-                </ul>
-              </div>
-              
-              <div class="performance-metrics">
-                <h4>Key Insights:</h4>
-                <ul>
-                  <li>XGBoost demonstrated highest predictive accuracy for imbalanced loan datasets</li>
-                  <li>Credit history and debt-to-income ratio identified as most significant approval factors</li>
-                  <li>SMOTE implementation improved minority class prediction by 15%</li>
-                  <li>Interactive interface enables loan officers to simulate approval scenarios</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div class="tech-stack-container">
-              <h4>Technology Stack:</h4>
-              <div class="tech-stack">
-                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
-                <img src="https://img.shields.io/badge/XGBoost-017CEE?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter">
-                <img src="https://img.shields.io/badge/imbalanced--learn-FF6F61?style=for-the-badge" alt="Imbalanced-learn">
-              </div>
-            </div>
-            
-            <div class="project-links">
-              <a href="https://github.com/trymoremhlanga2000-jpg/Loan-Default-Prediction" target="_blank" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Source Code
-              </a>
-              <a href="https://loan-default-prediction-ryn.streamlit.app/" target="_blank" class="btn btn-secondary">
-                <i class="fas fa-external-link-alt"></i> Live Deployment
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 6: Statistical Distribution Research Framework -->
-        <article class="project-card">
-          <div class="project-header">
-            <div class="project-info">
-              <h3 class="project-title">Sine-Type II Half-Logistic Weibull Distribution Framework</h3>
-              <p class="project-domain"><strong>Domain:</strong> Statistical Research • Probability Theory • Mathematical Modeling</p>
-            </div>
-            <div class="project-image">
-              <img src="assets/distribution.PNG" alt="Statistical Distribution Visualizations" loading="lazy">
-            </div>
-          </div>
-          
-          <div class="project-details">
-            <p class="project-objective"><strong>Objective:</strong> Design and implement a novel probability distribution for modeling complex real-world phenomena with enhanced flexibility for reliability analysis, survival modeling, and financial data applications.</p>
-            
-            <div class="project-description">
-              <p>This research-grade implementation presents the Sine-Type II Half-Logistic Weibull (STIIHLW) distribution through a three-stage transformation process with interactive visualization of statistical functions.</p>
-              
-              <div class="technical-highlights">
-                <h4>Theoretical Foundation:</h4>
-                <ul>
-                  <li><strong>Base Distribution:</strong> Weibull distribution for reliability and lifetime data analysis</li>
-                  <li><strong>Type II Half-Logistic Transformation:</strong> Enhances skewness control and tail behavior while preserving support</li>
-                  <li><strong>Sine Transformation:</strong> Introduces non-monotonic hazard functions and multi-modal behavior</li>
-                  <li><strong>Mathematical Implementation:</strong> Complete derivation of PDF, CDF, survival, and hazard functions</li>
-                  <li><strong>Parameter Estimation:</strong> Maximum Likelihood Estimation and Bayesian methods for distribution fitting</li>
-                </ul>
-              </div>
-              
-              <div class="performance-metrics">
-                <h4>Visualization Framework:</h4>
-                <ul>
-                  <li>Real-time parameter adjustment with immediate visualization updates</li>
-                  <li>Comparative analysis with base Weibull distribution</li>
-                  <li>Interactive plots for PDF, CDF, survival, and hazard functions</li>
-                  <li>Clean mathematical structure with interpretable parameter effects</li>
-                  <li>Mobile-responsive deployment via Streamlit Community Cloud</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div class="tech-stack-container">
-              <h4>Technology Stack:</h4>
-              <div class="tech-stack">
-                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-                <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white" alt="R">
-                <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
-                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
-                <img src="https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white" alt="SciPy">
-                <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib">
-                <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
-              </div>
-            </div>
-            
-            <div class="project-links">
-              <a href="https://github.com/trymoremhlanga2000-jpg/Sine-Type-II-Half-Logistic-Weibull-Distribution" target="_blank" class="btn btn-primary">
-                <i class="fas fa-code"></i> View Source Code
-              </a>
-              <a href="#" target="_blank" class="btn btn-secondary">
-                <i class="fas fa-external-link-alt"></i> Interactive Demo
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===================== EXPERIENCE ===================== -->
-    <section id="experience">
-      <div class="container">
-        <div class="section-card">
-          <h2>Professional Experience</h2>
-          <h3>Loans Officer Intern @ Probfix Financial Services</h3>
-          <p><em>March 2023 – October 2023</em></p>
-          <ul>
-            <li>Cleaned and managed financial data for 100+ clients monthly, improving report accuracy by 10%</li>
-            <li>Supported over 50 loan assessments, accelerating disbursement timelines</li>
-            <li>Prepared weekly financial summaries for management decision-making</li>
-            <li>Maintained 100% data accuracy across Excel-based systems</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== EDUCATION ===================== -->
-    <section id="education">
-      <div class="container">
-        <div class="section-card">
-          <h2>Education</h2>
-          <h3>BSc Honours in Applied Statistics : First Class Division</h3>
-          <p>Midlands State University, Zimbabwe</p>
-          <p><em>September 2021 – June 2025</em></p>
-          <ul>
-            <li>Graduated with First Class Honours</li>
-            <li>Research Project: Credit Risk Prediction using Neural Networks and Reject Inference</li>
-            <li>Tools: Python, R, STATA</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CONTACT ===================== -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-card">
-          <h2>Get In Touch</h2>
-          <p>
-            If you are seeking a technically rigorous, analytically grounded and deployment-ready
-            data professional, I welcome collaboration on innovative projects and data challenges.
-          </p>
-          <div class="contact-links">
-            <a href="mailto:trymoremhlanga5021@gmail.com">
-              <i class="fas fa-envelope"></i> Email
-            </a>
-            <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank">
-              <i class="fab fa-github"></i> GitHub
-            </a>
-          </div>
-          <p class="footer-note">
-            &copy; <span id="year"></span> Trymore Mhlanga. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </section>
-
-  </div> <!-- End of main-content -->
-
-  <script>
-    // Set current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if(targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if(targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
+            --max-width: 1280px;
         }
-      });
-    });
 
-    // Add active class to navigation links based on scroll position
-    window.addEventListener('scroll', function() {
-      const sections = document.querySelectorAll('section[id]');
-      const scrollPos = window.scrollY + 100;
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if(scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-          document.querySelectorAll('.sidebar-nav a, .nav-links a').forEach(link => {
-            link.classList.remove('active');
-            if(link.getAttribute('href') === `#${sectionId}`) {
-              link.classList.add('active');
+        /* ===================== GLOBAL RESETS ===================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: var(--transition-normal);
+        }
+
+        /* ===================== TYPOGRAPHY ===================== */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+
+        .text-gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===================== LAYOUT & CONTAINERS ===================== */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 1rem auto 0;
+        }
+
+        /* ===================== NAVIGATION ===================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition-normal);
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            color: var(--accent-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: var(--transition-normal);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* ===================== HERO SECTION ===================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+
+        .profile-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-primary);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            transition: var(--transition-normal);
+        }
+
+        .profile-image:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* ===================== PROJECTS SECTION ===================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-normal);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .project-domain {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .project-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* ===================== TECH BADGES ===================== */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .tech-badge:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .tech-badge i {
+            font-size: 1rem;
+        }
+
+        /* ===================== PROJECT LINKS ===================== */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .project-link {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .project-link.primary {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .project-link.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .project-link.secondary {
+            background: transparent;
+            border: 2px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        .project-link.secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ===================== ABOUT SECTION ===================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===================== SKILLS SECTION ===================== */
+        .skills-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-category h3 i {
+            color: var(--accent-primary);
+        }
+
+        /* ===================== EXPERIENCE & EDUCATION ===================== */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            border: 4px solid var(--bg-primary);
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        /* ===================== CONTACT SECTION ===================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: var(--transition-fast);
+        }
+
+        .contact-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* ===================== FOOTER ===================== */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            transition: var(--transition-normal);
+        }
+
+        .social-link:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 2rem;
+        }
+
+        /* ===================== ANIMATIONS ===================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-          });
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-      });
-    });
 
-    // Simple typing effect for hero subtitle
-    const typingText = document.getElementById('typing-text');
-    if(typingText) {
-      const texts = ['Applied Statistician', 'Data Scientist', 'Machine Learning Engineer', 'AI Researcher'];
-      let textIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      
-      function type() {
-        const currentText = texts[textIndex];
-        
-        if(isDeleting) {
-          typingText.textContent = currentText.substring(0, charIndex - 1);
-          charIndex--;
-        } else {
-          typingText.textContent = currentText.substring(0, charIndex + 1);
-          charIndex++;
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
-        
-        if(!isDeleting && charIndex === currentText.length) {
-          isDeleting = true;
-          setTimeout(type, 1500);
-        } else if(isDeleting && charIndex === 0) {
-          isDeleting = false;
-          textIndex = (textIndex + 1) % texts.length;
-          setTimeout(type, 500);
-        } else {
-          setTimeout(type, isDeleting ? 50 : 100);
-        }
-      }
-      
-      // Start typing effect after page load
-      setTimeout(type, 1000);
-    }
-  </script>
 
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* ===================== RESPONSIVE DESIGN ===================== */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.75rem 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition-normal);
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow-md);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding-top: 100px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .timeline-marker {
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 4rem 0;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===================== UTILITY CLASSES ===================== */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 3rem; }
+        .opacity-0 { opacity: 0; }
+        .opacity-100 { opacity: 1; }
+        .hidden { display: none; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+
+        /* ===================== SCROLLBAR STYLING ===================== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--border-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">
+                <i class="fas fa-code logo-icon"></i>
+                <span>Trymore Mhlanga</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO SECTION ===================== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content animate-fade-in-up">
+                <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-image floating">
+                
+                <h1 class="hero-title">Trymore Mhlanga</h1>
+                <h2 class="hero-subtitle">Applied Statistician & Data Scientist</h2>
+                
+                <p class="hero-description">
+                    First Class Honours Applied Statistician specializing in predictive modeling, 
+                    machine learning, and production ready data systems. Transforming complex 
+                    datasets into actionable insights with rigorous statistical methodology and 
+                    modern deployment practices.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn">
+                        <i class="fas fa-laptop-code"></i> View Projects
+                    </a>
+                    <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-github"></i> GitHub Profile
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-envelope"></i> Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ABOUT SECTION ===================== -->
+    <section id="about" class="animate-fade-in-up">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p class="section-subtitle">Statistical rigor meets practical data science implementation</p>
+            </div>
+            
+            <div class="about-content">
+                <div>
+                    <h3>Professional Profile</h3>
+                    <p>
+                        I am an Applied Statistician with comprehensive expertise spanning the complete data 
+                        science lifecycle from experimental design and data collection to model deployment 
+                        and monitoring. My approach combines theoretical statistical rigor with practical 
+                        implementation skills.
+                    </p>
+                    <p>
+                        I specialize in building interpretable machine learning systems that balance 
+                        predictive accuracy with business relevance. My work focuses on creating scalable 
+                        solutions that provide clear, actionable insights for data driven decision making.
+                    </p>
+                    <p>
+                        With a First Class Honours degree in Applied Statistics, I bring strong foundations 
+                        in probability theory, statistical inference, and experimental design to every 
+                        project, ensuring methodological soundness and reliable results.
+                    </p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">6+</div>
+                            <div class="stat-label">Production Projects</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">92%</div>
+                            <div class="stat-label">Model Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Tech Domains</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Deployment Success</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Core Competencies</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fas fa-chart-line"></i> Predictive Modeling</span>
+                        <span class="tech-badge"><i class="fas fa-database"></i> Data Engineering</span>
+                        <span class="tech-badge"><i class="fas fa-brain"></i> Machine Learning</span>
+                        <span class="tech-badge"><i class="fas fa-project-diagram"></i> Statistical Inference</span>
+                        <span class="tech-badge"><i class="fas fa-rocket"></i> Model Deployment</span>
+                        <span class="tech-badge"><i class="fas fa-chart-bar"></i> Data Visualization</span>
+                        <span class="tech-badge"><i class="fas fa-flask"></i> Experimental Design</span>
+                        <span class="tech-badge"><i class="fas fa-code"></i> Production Systems</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SKILLS SECTION ===================== -->
+    <section id="skills" class="animate-fade-in-up">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technical Skills</h2>
+                <p class="section-subtitle">Comprehensive toolkit for modern data science workflows</p>
+            </div>
+            
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                        <span class="tech-badge"><i class="fab fa-r-project"></i> R</span>
+                        <span class="tech-badge"><i class="fas fa-database"></i> SQL</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> Machine Learning</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fas fa-robot"></i> Scikit Learn</span>
+                        <span class="tech-badge"><i class="fas fa-network-wired"></i> TensorFlow</span>
+                        <span class="tech-badge"><i class="fas fa-layer-group"></i> Keras</span>
+                        <span class="tech-badge"><i class="fas fa-chart-bar"></i> XGBoost</span>
+                        <span class="tech-badge"><i class="fas fa-balance-scale"></i> Statsmodels</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Data Engineering</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fas fa-table"></i> Pandas</span>
+                        <span class="tech-badge"><i class="fas fa-calculator"></i> NumPy</span>
+                        <span class="tech-badge"><i class="fas fa-bolt"></i> PySpark</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-rocket"></i> Deployment & Cloud</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
+                        <span class="tech-badge"><i class="fab fa-google"></i> GCP</span>
+                        <span class="tech-badge"><i class="fas fa-stream"></i> Streamlit</span>
+                        <span class="tech-badge"><i class="fas fa-server"></i> FastAPI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROJECTS SECTION ===================== -->
+    <section id="projects" class="animate-fade-in-up">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <p class="section-subtitle">End to end machine learning applications with production deployment</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1: Credit Risk System -->
+                <article class="project-card">
+                    <img src="assets/credit-risk.PNG" alt="Credit Risk Assessment System" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Credit Risk Assessment System</h3>
+                        <span class="project-domain">Financial Technology • Machine Learning</span>
+                        
+                        <p class="project-description">
+                            A credit scoring system predicting customer default probability using 
+                            ensemble machine learning models with real time interactive interface for financial 
+                            decision makers.
+                        </p>
+                        
+                        <ul class="project-features">
+                            <li>Comparative analysis of 14+ ML models including Gradient Boosting and Random Forest</li>
+                            <li>Automated preprocessing pipeline with advanced feature engineering</li>
+                            <li>Model accuracy up to 92% with ROC AUC score of 0.94</li>
+                            <li>SHAP based model interpretability for transparent decision making</li>
+                            <li>Streamlit deployment with real time prediction capabilities</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fas fa-robot"></i> Scikit Learn</span>
+                            <span class="tech-badge"><i class="fas fa-table"></i> Pandas</span>
+                            <span class="tech-badge"><i class="fas fa-stream"></i> Streamlit</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/trymoremhlanga2000-jpg/Credit-risk" target="_blank" class="project-link primary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="https://trymore-credit-risk-app.streamlit.app/" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Customer Churn System -->
+                <article class="project-card">
+                    <img src="assets/customer-churn.PNG" alt="Customer Churn Prediction System" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Customer Churn Prediction System</h3>
+                        <span class="project-domain">Customer Intelligence • Business Analytics</span>
+                        
+                        <p class="project-description">
+                            Machine learning system identifying at risk customers in subscription based 
+                            services with proactive retention strategies and interpretable predictions 
+                            for business stakeholders.
+                        </p>
+                        
+                        <ul class="project-features">
+                            <li>Automated Kaggle API integration with comprehensive data cleaning pipeline</li>
+                            <li>SMOTE implementation for handling class imbalance in churn prediction</li>
+                            <li>Systematic evaluation of Logistic Regression versus Random Forest models</li>
+                            <li>ROC AUC score of 0.91 with optimized recall for maximum churner identification</li>
+                            <li>Complete model serialization and Streamlit deployment</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fas fa-robot"></i> Scikit Learn</span>
+                            <span class="tech-badge"><i class="fas fa-balance-scale"></i> Imbalanced Learn</span>
+                            <span class="tech-badge"><i class="fas fa-stream"></i> Streamlit</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/trymoremhlanga2000-jpg/Customer-Churn" target="_blank" class="project-link primary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="https://customer-churn-bytrymore.streamlit.app/" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Netflix Dashboard -->
+                <article class="project-card">
+                    <img src="assets/netflix-dashboard.PNG" alt="Netflix Analytics Dashboard" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Netflix Interactive Analytics Dashboard</h3>
+                        <span class="project-domain">Media Analytics • Business Intelligence</span>
+                        
+                        <p class="project-description">
+                            Interactive dashboard transforming Netflix's content library into actionable 
+                            insights through comprehensive analysis of content trends, genre preferences, 
+                            and global production patterns.
+                        </p>
+                        
+                        <ul class="project-features">
+                            <li>Six interactive modules for multidimensional content analysis</li>
+                            <li>Real time filtering by content type, genre, country, and release year</li>
+                            <li>Geospatial visualization with interactive choropleth maps</li>
+                            <li>Temporal analysis tracking monthly and yearly release patterns</li>
+                            <li>Professional UI/UX with responsive design for all devices</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fas fa-chart-line"></i> Plotly</span>
+                            <span class="tech-badge"><i class="fas fa-table"></i> Pandas</span>
+                            <span class="tech-badge"><i class="fas fa-stream"></i> Streamlit</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/trymoremhlanga2000-jpg/Netflix-Interactive-Dashboard" target="_blank" class="project-link primary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="https://prediction-of-movie-revenue-bytrymoremhlanga.streamlit.app/" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i> Live Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4: Exam Score Predictor -->
+                <article class="project-card">
+                    <img src="assets/exam-score.PNG" alt="Exam Score AI Predictor" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Exam Score AI Predictor</h3>
+                        <span class="project-domain">Educational Technology • Deep Learning</span>
+                        
+                        <p class="project-description">
+                            Deep learning application predicting student exam scores based on academic 
+                            behavior, study habits, and environmental factors with real time predictions 
+                            and personalized improvement recommendations.
+                        </p>
+                        
+                        <ul class="project-features">
+                            <li>Custom neural network architecture built with TensorFlow and Keras</li>
+                            <li>12+ input features including study hours, attendance, and sleep quality</li>
+                            <li>Interactive Plotly gauge charts for intuitive score visualization</li>
+                            <li>Smart recommendation system based on predicted performance patterns</li>
+                            <li>Cached model loading for optimized application performance</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fas fa-network-wired"></i> TensorFlow</span>
+                            <span class="tech-badge"><i class="fas fa-layer-group"></i> Keras</span>
+                            <span class="tech-badge"><i class="fas fa-chart-line"></i> Plotly</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/trymoremhlanga2000-jpg/Exam-Score-Prediction" target="_blank" class="project-link primary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="https://exam-score-prediction-trymoremlangaaa.streamlit.app/" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i> Live Application
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 5: Loan Default Prediction -->
+                <article class="project-card">
+                    <img src="assets/loan-approval.PNG" alt="Loan Default Prediction System" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Loan Default Prediction System</h3>
+                        <span class="project-domain">Banking Technology • Credit Scoring</span>
+                        
+                        <p class="project-description">
+                            Multimodel prediction system analyzing key factors influencing bank loan 
+                            approval decisions with comprehensive algorithm comparison and interactive 
+                            interface for loan officers.
+                        </p>
+                        
+                        <ul class="project-features">
+                            <li>Comparative framework evaluating six machine learning algorithms</li>
+                            <li>Identification of key approval factors including credit history and income</li>
+                            <li>SMOTE implementation improving minority class prediction by 15%</li>
+                            <li>Interactive Streamlit GUI for real time approval scenario simulation</li>
+                            <li>Multiple model serialization enabling A/B testing capabilities</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fas fa-robot"></i> Scikit Learn</span>
+                            <span class="tech-badge"><i class="fas fa-chart-bar"></i> XGBoost</span>
+                            <span class="tech-badge"><i class="fas fa-stream"></i> Streamlit</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/trymoremhlanga2000-jpg/Loan-Default-Prediction" target="_blank" class="project-link primary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="https://loan-default-prediction-ryn.streamlit.app/" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i> Live Deployment
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 6: Statistical Distribution Research -->
+                <article class="project-card">
+                    <img src="assets/distribution.PNG" alt="Statistical Distribution Framework" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Statistical Distribution Research Framework</h3>
+                        <span class="project-domain">Statistical Research • Mathematical Modeling</span>
+                        
+                        <p class="project-description">
+                            Research grade implementation of novel probability distribution for modeling 
+                            complex real world phenomena with enhanced flexibility for reliability analysis, 
+                            survival modeling, and financial applications.
+                        </p>
+                        
+                        <ul class="project-features">
+                            <li>Three stage transformation process creating Sine Type II Half Logistic Weibull distribution</li>
+                            <li>Complete mathematical derivation of PDF, CDF, survival, and hazard functions</li>
+                            <li>Real time parameter adjustment with immediate visualization updates</li>
+                            <li>Comparative analysis with base Weibull distribution for validation</li>
+                            <li>Interactive Streamlit deployment for academic and research exploration</li>
+                        </ul>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-badge"><i class="fab fa-r-project"></i> R</span>
+                            <span class="tech-badge"><i class="fas fa-calculator"></i> SciPy</span>
+                            <span class="tech-badge"><i class="fas fa-chart-line"></i> Plotly</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/trymoremhlanga2000-jpg/Sine-Type-II-Half-Logistic-Weibull-Distribution" target="_blank" class="project-link primary">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                            <a href="https://sine-type-ii-half-logistic-weibull-distribution-trymoremhlang.streamlit.app" target="_blank" class="project-link secondary">
+                                <i class="fas fa-external-link-alt"></i> Interactive Demo
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== EXPERIENCE SECTION ===================== -->
+    <section id="experience" class="animate-fade-in-up">
+        <div class="container">
+            <div class="section-header">
+                <h2>Professional Experience</h2>
+                <p class="section-subtitle">Practical application of data science in real world settings</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">March 2023 to October 2023</div>
+                    <div class="timeline-content">
+                        <h3>Loans Officer Intern</h3>
+                        <p class="text-muted">Probfix Financial Services</p>
+                        <ul class="project-features">
+                            <li>Cleaned and managed financial data for 100+ clients monthly, improving report accuracy by 10%</li>
+                            <li>Supported over 50 loan assessments, accelerating disbursement timelines</li>
+                            <li>Prepared weekly financial summaries for management decision making</li>
+                            <li>Maintained 100% data accuracy across Excel based systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== EDUCATION SECTION ===================== -->
+    <section id="education" class="animate-fade-in-up">
+        <div class="container">
+            <div class="section-header">
+                <h2>Education</h2>
+                <p class="section-subtitle">Academic foundations in statistical theory and methodology</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">September 2021 to June 2025</div>
+                    <div class="timeline-content">
+                        <h3>BSc Honours in Applied Statistics</h3>
+                        <p class="text-muted">First Class Division • Midlands State University, Zimbabwe</p>
+                        <ul class="project-features">
+                            <li>Graduated with First Class Honours distinction</li>
+                            <li>Research Project: Credit Risk Prediction using Neural Networks and Reject Inference</li>
+                            <li>Comprehensive training in statistical software: Python, R, STATA</li>
+                            <li>Advanced coursework in probability theory, statistical inference, and experimental design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACT SECTION ===================== -->
+    <section id="contact" class="animate-fade-in-up">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In Touch</h2>
+                <p class="section-subtitle">Let's discuss data science opportunities and innovative projects</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <h3>Email</h3>
+                    <p>Primary contact for professional inquiries</p>
+                    <a href="mailto:trymoremhlanga5021@gmail.com" class="contact-link">trymoremhlanga5021@gmail.com</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fab fa-linkedin contact-icon"></i>
+                    <h3>LinkedIn</h3>
+                    <p>Professional network and detailed experience</p>
+                    <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="contact-link">Connect on LinkedIn</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fab fa-github contact-icon"></i>
+                    <h3>GitHub</h3>
+                    <p>Complete project portfolio and source code</p>
+                    <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="contact-link">View GitHub Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>Trymore Mhlanga</h3>
+                <p>Applied Statistician & Data Scientist</p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/trymoremhlanga2000-jpg" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/trymore-mhlanga/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:trymoremhlanga5021@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                
+                <p class="copyright">
+                    &copy; <span id="currentYear"></span> Trymore Mhlanga. All rights reserved.<br>
+                    Built with modern web technologies and statistical precision.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===================== JAVASCRIPT FUNCTIONALITY =====================
+        
+        // DOM Elements
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const currentYear = document.getElementById('currentYear');
+        
+        // Set current year in footer
+        currentYear.textContent = new Date().getFullYear();
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Update active nav link
+            updateActiveNavLink();
+        });
+        
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offset = 80;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update active nav link based on scroll position
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Initialize
+        updateActiveNavLink();
+        
+        // Add floating animation to profile image
+        const profileImage = document.querySelector('.profile-image');
+        if (profileImage) {
+            profileImage.classList.add('floating');
+        }
+        
+        // Project card hover effects
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Console greeting (optional)
+        console.log('%c👋 Welcome to Trymore Mhlanga\'s Portfolio!', 'color: #6366f1; font-size: 16px; font-weight: bold;');
+        console.log('%c🔍 Built with modern web technologies and statistical precision.', 'color: #8b5cf6; font-size: 14px;');
+    </script>
 </body>
 </html>
