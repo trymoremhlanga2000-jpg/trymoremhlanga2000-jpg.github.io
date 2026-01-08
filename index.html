@@ -1,73 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trymore Mhlanga |Statistician, Aspiring Data Scientist & ML Engineer</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="assets/css/main.css">
-  <style>
-    /* ===== HERO SPECIFIC STYLES ===== */
-    #hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-      position: relative;
-    }
-    #hero img.profile-photo {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1.2rem;
-      border: 3px solid #00d4ff;
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-    }
-    #hero h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    #hero h2 {
-      font-size: 1.8rem;
-      color: #00d4ff;
-      height: 2.2rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero-buttons a.btn {
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-    }
-  </style>
-</head>
-
-<body>
-
-<!-- ===================== NAV ===================== -->
-<nav class="navbar">
-  <div class="container">
-    <div class="logo">Trymore Mhlanga</div>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">Profile</a></li>
-      <li><a href="#skills">Capabilities</a></li>
-      <li><a href="#projects">Case Studies</a></li>
-      <li><a href="#contact">Engage</a></li>
-    </ul>
-  </div>
+<!-- ===================== FIXED LEFT NAVIGATION ===================== -->
+<nav class="side-nav">
+  <div class="nav-brand">Trymore Mhlanga</div>
+  <ul class="nav-links">
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#projects">Case Studies</a></li>
+    <li><a href="#contact">Engage</a></li>
+  </ul>
 </nav>
 
-<!-- ===================== HERO (UPGRADED) ===================== -->
-<section id="hero">
+<!-- ===================== HERO (HOME) ===================== -->
+<section id="hero" class="hero-section">
   <img src="Trymore_Profile_photo.png" alt="Trymore Mhlanga" class="profile-photo">
+
   <h1>Trymore Mhlanga</h1>
   <h2><span class="typing"></span></h2>
 
-  <p style="max-width: 900px; margin: 1.5rem auto;">
+  <p class="hero-text">
     First-Class Honours Statistician, Aspiring Data Scientist & Machine Learning Engineer. I design predictive and analytical systems
     that transform complex datasets into actionable business insights. My expertise bridges statistical theory, applied machine learning,
     and production-ready deployment to solve real-world problems across finance, media analytics, and customer intelligence.
@@ -79,6 +29,102 @@
   </div>
 </section>
 
+<!-- ===================== STYLES ===================== -->
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #0b0f14;
+    color: #eaeaea;
+  }
+
+  /* SIDE NAV */
+  .side-nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: #070b10;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .nav-brand {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+  }
+
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links li {
+    margin-bottom: 1.2rem;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #bfc7d5;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #1ddcff;
+  }
+
+  /* HERO */
+  .hero-section {
+    margin-left: 240px;
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: radial-gradient(circle at top, #121a24, #05070a);
+  }
+
+  .profile-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid #1ddcff;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-text {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    line-height: 1.7;
+    color: #c9d1e3;
+  }
+
+  .hero-buttons {
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    margin: 0 0.5rem;
+    border-radius: 30px;
+    background: #1ddcff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #1ddcff;
+    border: 1px solid #1ddcff;
+  }
+</style>
 
 
 
